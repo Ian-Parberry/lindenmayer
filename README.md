@@ -7,7 +7,7 @@ The source code for this basic L-system generator, written and maintained by
 extend and modify while they are learning about Lindenmayer systems. It can
 generate and save images from a few hard-coded L-systems and the basic
 functionality is in place for adding more. See 
-[https://ian-parberry.github.io/lindemayer/](https://ian-parberry.github.io/lindemayer/)
+[https://ian-parberry.github.io/lindenmayer/](https://ian-parberry.github.io/lindenmayer/)
 for more information.
 
 ## Requirements
