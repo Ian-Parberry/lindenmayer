@@ -1,5 +1,7 @@
 # Lindenmayer System Image Generator
 
+![Some examples.](/Doxygen/Images/plants.png)
+
 ## Description
 
 The source code for this basic L-system generator, written and maintained by
