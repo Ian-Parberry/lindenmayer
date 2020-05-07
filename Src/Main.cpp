@@ -29,7 +29,9 @@ static CMain* g_pMain = nullptr; ///< Pointer to the main class.
 
 /// \brief Window procedure.
 ///
-/// This is the handler for messages from the operating system. 
+/// This is the handler for messages from the operating system. This function
+/// assumes that the menu IDs for the `L-System` menu are consecutive and
+/// run from `IDM_LSYS_BRANCHING` to `IDM_LSYS_HEXGOSPER` (see WindowsHelpers.h).
 /// \param hWnd Window handle.
 /// \param message Message code.
 /// \param wParam Parameter for message.
@@ -37,74 +39,77 @@ static CMain* g_pMain = nullptr; ///< Pointer to the main class.
 /// \return 0 If message is handled.
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
+  UINT nMenuId = 0; //menu identifier for menu command messages
+
   switch(message){
-    case WM_CREATE: 
-      g_pMain = new CMain(hWnd);
+    case WM_CREATE: //window has been created
+      g_pMain = new CMain(hWnd); //create the main class
       return 0;
 
-    case WM_DESTROY:
-      delete g_pMain;
-      PostQuitMessage(0);
+    case WM_DESTROY: //window has been removed from the screen
+      delete g_pMain; //delete the main class
+      PostQuitMessage(0); //ready to shut down
       return 0;
+      
+    case WM_SIZING: //user is resizing the window
+	    ForceMinWinSize(hWnd, wParam, (RECT*)lParam, 320);
+	    return 0;
 
-    case WM_SIZE:    
+    case WM_SIZE: //window has been resized
       InvalidateRect(hWnd, nullptr, TRUE);
       return 0;
 
-    case WM_PAINT: {
-      PAINTSTRUCT ps; //paint structure
-      HDC hdc = BeginPaint(hWnd, &ps); //device context
-      g_pMain->OnPaint(hdc);
-      EndPaint(hWnd, &ps);
-
+    case WM_PAINT: //window needs to be redrawn
+      g_pMain->OnPaint();
       return 0;
-    } //case
  
-    case WM_COMMAND: {
-      const UINT idm = LOWORD(wParam);
+    case WM_COMMAND: //user has selected a command from the menu
+      nMenuId = LOWORD(wParam); //menu id
 
-      if(IDM_LSYS_BRANCHING <= idm && idm <= IDM_LSYS_HEXGOSPER)
-        g_pMain->SetType(idm);
+      //first the L-system types 
 
-      else switch(idm){  
-        case IDM_FILE_GENERATE:
+      if(IDM_LSYS_BRANCHING <= nMenuId && nMenuId <= IDM_LSYS_HEXGOSPER)
+        g_pMain->SetType(nMenuId);
+
+      else switch(nMenuId){  //now the other manu entries
+        case IDM_FILE_GENERATE: //generate a stochastic L-system
           if(g_pMain->IsStochastic()){
             g_pMain->Generate();
             g_pMain->Draw();
           } //if
           break;         
 
-        case IDM_FILE_SAVE:
+        case IDM_FILE_SAVE: //save bitmap to image file
           g_pMain->SaveImage();
           break;
 
-        case IDM_VIEW_THINLINES:
-          g_pMain->SetLineThickness(LineThickness::Thin);
+        //case IDM_VIEW_THINLINES: //draw with thin lines
+        //  g_pMain->SetLineThickness(LineThickness::Thin);
+        //  break;
+
+        case IDM_VIEW_THICKLINES: //draw with thick lines
+          g_pMain->ToggleLineThickness();
           break;
 
-        case IDM_VIEW_THICKLINES:
-          g_pMain->SetLineThickness(LineThickness::Thick);
-          break;
-
-        case IDM_VIEW_RULES: 
+        case IDM_VIEW_RULES: //draw or hide the rule string
           g_pMain->ToggleShowRules();
           break;
 
-        case IDM_FILE_QUIT: 
+        case IDM_FILE_QUIT: //so long, farewell, auf weidersehn, goodbye!
           SendMessage(hWnd, WM_CLOSE, 0, 0);
           break;
       } //switch
 
-      return 0;
-    } //case
+      return 0; //all is good
 
-    default: return DefWindowProc(hWnd, message, wParam, lParam);
+    default: return DefWindowProc(hWnd, message, wParam, lParam); //not my message
   } //switch
 } //WndProc
 
 /// \brief The main entry point for this application.  
 ///
-/// The main entry point for this application. 
+/// Initialize a window and start the message pump.
+/// This is the main entry point for this application. 
 /// \param hInstance Handle to the current instance of this application.
 /// \param hPrevInstance Unused.
 /// \param lpCmdLine Unused.
@@ -114,18 +119,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
   _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
 {
-  UNREFERENCED_PARAMETER(hPrevInstance);
-  UNREFERENCED_PARAMETER(lpCmdLine);
-  UNREFERENCED_PARAMETER(nCmdShow);
+  UNREFERENCED_PARAMETER(hPrevInstance); //nope
+  UNREFERENCED_PARAMETER(lpCmdLine); //nope
+  UNREFERENCED_PARAMETER(nCmdShow); //nope
 
-  InitWindow(hInstance, nCmdShow, WndProc);
+  InitWindow(hInstance, nCmdShow, WndProc); //create and show a window
 
-  MSG msg; 
+  MSG msg; //current message
 
-  while(GetMessage(&msg, nullptr, 0, 0)){
+  while(GetMessage(&msg, nullptr, 0, 0)){ //message pump
     TranslateMessage(&msg);
     DispatchMessage(&msg);
   } //while
 
-  return (int)msg.wParam;
+  return (int)msg.wParam; //are we good?
 } //wWinMain

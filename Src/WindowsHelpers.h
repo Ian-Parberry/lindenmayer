@@ -52,7 +52,6 @@
 #define IDM_LSYS_HEXGOSPER 11 ///< Menu id for hexagonal Gosper curve.
 
 #define IDM_VIEW_RULES 12 ///< Menu id for showing current rules.
-#define IDM_VIEW_THINLINES 13 ///< Menu id for thin lines.
 #define IDM_VIEW_THICKLINES 14 ///< Menu id for thick lines.
 
 #pragma endregion Menu IDs
@@ -68,5 +67,8 @@ ULONG_PTR InitGDIPlus(); ///< Initialize GDI+.
 int GetEncoderClsid(const WCHAR* format, CLSID* pClsid); ///< Get encoder CLSID.
 std::wstring GetSaveFileName(HWND hwnd); ///< Get saved image file name.
 void AddPointToRect(RECT& r, Gdiplus::PointF point); ///< Add point to rectangle.
+Gdiplus::RectF GetClientRectF(HWND hwnd); ///< Get client rectangle.
+void ForceMinWinSize(HWND hwnd, WPARAM wParam,
+  RECT* pRect, int n); ///< Enforce minimum window size.
 
 #pragma endregion Helper functions

@@ -40,7 +40,7 @@
 /// \param WndProc Window procedure.
 
 void InitWindow(HINSTANCE hInst, INT nShow, WNDPROC WndProc){
-  const char appname[] = "L-System Image Generator";
+  const char appname[] = "Lindenmayer";
    
   WNDCLASSEX wndClass = {0}; //extended window class structure
 
@@ -180,3 +180,80 @@ void AddPointToRect(RECT& r, Gdiplus::PointF point){
   r.bottom = max(r.bottom, int(std::ceil (point.Y)));
 } //AddPointToRect
 
+/// Get client rectangle in `Gdiplus::RectF` format.
+/// \param hwnd Window handle.
+/// \return Client rectangle of that window.
+
+Gdiplus::RectF GetClientRectF(HWND hwnd){
+  RECT r; //for client rectangle
+  GetClientRect(hwnd, &r); //get client rectangle
+
+  return Gdiplus::RectF((float)r.left, (float)r.top,
+    (float)r.right - r.left, (float)r.bottom - r.top);
+} //GetClientRectF
+
+/// Enforce a minimum width and height for the client area of the window
+/// in response to a WM_SIZING message. This function resizes the drag
+/// rectangle provided by the WM_SIZING message.
+/// \param hwnd Window handle.
+/// \param wParam WMSZ message telling us which edge is being dragged on.
+/// \param pRect [IN, OUT] Pointer to drag rectangle.
+/// \param n Minimum width and height of client area.
+
+void ForceMinWinSize(HWND hwnd, WPARAM wParam, RECT* pRect, int n){ 
+  RECT cr; //client rectangle
+  RECT wr; //window rectangle, includes client rectangle and borders
+
+  GetClientRect(hwnd, &cr);
+  GetWindowRect(hwnd, &wr);
+
+  //combined border width and height
+
+  const int bw = (wr.right - wr.left) - (cr.right - cr.left); //border width
+  const int bh = (wr.bottom - wr.top) - (cr.bottom - cr.top); //border height
+
+  //new drag window width and height
+
+  const int dw = max(n, pRect->right - pRect->left - bw) + bw; //new width
+  const int dh = max(n, pRect->bottom - pRect->top - bh) + bh; //new height
+
+  //enforce new  drag window width and height
+
+  switch(wParam){ //which edge are we dragging on?
+    case WMSZ_LEFT: //left edge
+      pRect->left = pRect->right - dw;
+      break;
+
+    case WMSZ_RIGHT: //right edge
+      pRect->right = pRect->left + dw;
+      break;
+      
+    case WMSZ_TOP: //top edge
+      pRect->top = pRect->bottom - dh;
+      break;
+      
+    case WMSZ_BOTTOM: //bottom edge
+      pRect->bottom = pRect->top + dh;
+      break;
+      
+    case WMSZ_TOPRIGHT: //top right corner
+      pRect->top = pRect->bottom - dh;
+      pRect->right = pRect->left + dw;
+      break;
+
+    case WMSZ_TOPLEFT: //top left corner
+      pRect->top = pRect->bottom - dh;
+      pRect->left = pRect->right - dw;
+      break;
+
+    case WMSZ_BOTTOMRIGHT: //bottom right corner
+      pRect->bottom = pRect->top + dh;
+      pRect->right = pRect->left + dw;
+      break;
+
+    case WMSZ_BOTTOMLEFT: //bottom left corner
+      pRect->bottom = pRect->top + dh;
+      pRect->left = pRect->right - dw;
+     break;
+  } //switch
+} //ForceMinWinSize

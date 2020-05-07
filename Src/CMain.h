@@ -31,12 +31,6 @@
 #include "WindowsHelpers.h"
 #include "Lsystem.h"
 
-/// \brief Line thickness for turtle graphics.
-
-enum class LineThickness{
-  Thin, Thick
-}; //LineThickness
-
 /// \brief The main class.
 ///
 /// The interface between I/O from Windows (input from the drop-down menus,
@@ -59,17 +53,22 @@ class CMain{
     LSystem m_cLSystem; ///< The L-system.
 
     UINT m_nType = IDM_LSYS_PLANT_A; ///< Current L-system type.
-    LineThickness m_eLineThickness = LineThickness::Thin; ///< Line thickness.
+    bool m_bThickLines = false; ///< Line thickness flag.
     bool m_bShowRules = true; ///< Whether to show the rules.
+
+    Gdiplus::FontFamily* m_pFontFamily = nullptr; ///< Font family.
+    Gdiplus::Font* m_pFont = nullptr; ///< Font.
 
     void SetRules(); ///< Create L-system rules.
     
     void Draw(const TurtleDesc& d); ///< Draw turtle graphics.
-    void DrawRules(Gdiplus::Graphics& graphics); ///< Draw L-system rules.
+    void DrawRules(Gdiplus::Graphics& graphics, Gdiplus::PointF p); ///< Draw rules.
 
     void CreateMenus(); ///< Create menus.
     void SetLSystemMenuChecks(); ///< Set L-system menu checkmarks.
     void EnableGenerateMenuEntry(); ///< Enable `Generate` in `File` menu.
+
+    int GetRuleStrWidth(Gdiplus::Graphics& graphics); ///< Get rule string width.
 
   public:
     CMain(const HWND hwnd); ///< Constructor.
@@ -78,11 +77,12 @@ class CMain{
     void Draw(); ///< Draw turtle graphics.
     void Generate(); ///< Generate L-system string.
 
-    void OnPaint(HDC hdc); ///< Paint the client area.
+    void OnPaint(); ///< Paint the client area.
     void SetType(UINT t); ///< Set type.
-    void SetLineThickness(LineThickness width); ///< Set line thickness.
+    //void SetLineThickness(LineThickness width); ///< Set line thickness.
     bool SaveImage(); ///< Save image to a file.
 
     const bool IsStochastic() const; ///< Is a stochastic L-system.
     void ToggleShowRules(); ///< Toggle the show rules flag.
+    void ToggleLineThickness(); ///< Toggle the line thickness flag.
 }; //CMain

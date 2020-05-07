@@ -31,17 +31,24 @@
 
 #pragma region Constructors and destructors
 
-/// Initialize GDI+, create a bitmap and a graphics object open on that bitmap,
-/// create the menus, initialize the check marks on the `L-System` menu,
-/// gray out the `Generate` entry in the `File` menu if the initial L-system
-/// create the L-system rules for the initial L-system type, generate and
-/// draw the initial string.
+/// Initialize GDI+, create a font for drawing text on the window, create a
+/// bitmap and a graphics object open on that bitmap, create the menus, 
+/// initialize the check marks on the various menu entries, gray out the
+/// `Generate` entry in the `File` menu if necessary, create the initial
+/// L-system rules, generate the initial string from those rules, then draw
+/// the corresponding line drawing to the bitmap.
 /// \param hwnd Window handle.
 
 CMain::CMain(const HWND hwnd):
   m_hWnd(hwnd)
 {
   m_gdiplusToken = InitGDIPlus(); 
+
+  m_pFontFamily = new Gdiplus::FontFamily(L"Consolas");
+  m_pFont = new Gdiplus::Font(m_pFontFamily, 14, Gdiplus::FontStyleRegular,
+    Gdiplus::UnitPixel);
+
+  //make the bitmap much larger than it needs to be
   
   const int w = 3000; //bitmap width
   const int h = 3000; //bitmap height
@@ -61,10 +68,8 @@ CMain::CMain(const HWND hwnd):
   const UINT bShowRules = m_bShowRules? MF_CHECKED: MF_UNCHECKED;
   CheckMenuItem(m_hViewMenu, IDM_VIEW_RULES, bShowRules);
 
-  if(m_eLineThickness == LineThickness::Thin)
-    CheckMenuItem(m_hViewMenu, IDM_VIEW_THINLINES, MF_CHECKED); 
-  else if(m_eLineThickness == LineThickness::Thick)
-    CheckMenuItem(m_hViewMenu, IDM_VIEW_THICKLINES, MF_CHECKED); 
+  if(m_bThickLines)
+    CheckMenuItem(m_hViewMenu, IDM_VIEW_THICKLINES, MF_CHECKED);
 
   //generate and draw the first object
   
@@ -72,11 +77,14 @@ CMain::CMain(const HWND hwnd):
   Draw();
 } //constructor
 
-/// Delete the graphics object and the bitmap, then shut down GDI+.
+/// Delete all GDI+ objects, then shut down GDI+.
 
 CMain::~CMain(){
   delete m_pGraphics;
   delete m_pBitmap;
+  delete m_pFontFamily;
+  delete m_pFont;
+
   Gdiplus::GdiplusShutdown(m_gdiplusToken);
 } //destructor
 
@@ -87,14 +95,14 @@ CMain::~CMain(){
 
 #pragma region Drawing functions
 
-/// Draw the bitmap to the window client area. If the window is smaller than
-/// the bitmap, then the top left of the bitmap is used. If the window is
-/// larger than the bitmap, then the bitmap is centered in the window. This
-/// function is intended to be called in response to a WM_PAINT message.
-/// \param hdc Device context for window to be painted.
+/// Draw the dirty rectangle from the bitmap to the window client area, scaled
+/// down if necessary. This function will only be called in response to a
+/// WM_PAINT message.
 
-void CMain::OnPaint(HDC hdc){
-  Gdiplus::Graphics graphics(hdc);
+void CMain::OnPaint(){
+  PAINTSTRUCT ps; //paint structure
+  HDC hdc = BeginPaint(m_hWnd, &ps); //device context
+  Gdiplus::Graphics graphics(hdc); //GDI+ graphics object
 
   //dirty rectangle width and height
   
@@ -115,35 +123,51 @@ void CMain::OnPaint(HDC hdc){
 
   //draw the dirty rectangle of the bitmap to the center of the client area
 
-  const int x = max(0, (nClientWidth - nDirtyWidth)/2);
-  const int y = max(0, (nClientHt - nDirtyHt)/2);
+  int textwidth = m_bShowRules? (int)std::ceil(GetRuleStrWidth(graphics)): 0;
 
-  graphics.DrawImage(m_pBitmap, x, y, m_rectDirty.left, m_rectDirty.top,
+  const int margin = 10; //default margin
+
+  const float xscale = float(nClientWidth
+    - (textwidth > 0? 3: 2)*margin - textwidth)/nDirtyWidth;
+  const float yscale = float(nClientHt - 2*margin)/nDirtyHt;
+  const float scale = min(min(xscale, yscale), 1);
+
+  Gdiplus::Rect rectDest;
+
+  rectDest.Width  = (int)std::floor(scale*nDirtyWidth);
+  rectDest.Height = (int)std::floor(scale*nDirtyHt);
+
+  rectDest.X = max(2*margin + textwidth, 
+    (nClientWidth - rectDest.Width + textwidth)/2);
+  rectDest.Y = max(margin, (nClientHt - rectDest.Height)/2);
+  
+  graphics.DrawImage(m_pBitmap, rectDest, m_rectDirty.left, m_rectDirty.top,
     nDirtyWidth, nDirtyHt, Gdiplus::UnitPixel);
 
- //draw the rules on the screen (note: not the bitmap)
+ //draw the rules on the screen (note: NOT on the bitmap)
 
-  if(m_bShowRules)DrawRules(graphics); //draw rule text, if required
+  if(m_bShowRules)
+    DrawRules(graphics, Gdiplus::PointF(margin, margin)); 
+
+  EndPaint(m_hWnd, &ps); //this must be done last
 } //OnPaint
 
 /// Draw the L-system rules text to a GDI+ graphics object.
 /// \param graphics Reference to a GDI+ graphics object.
+/// \param p Point at which to draw the rules (the top left pixel).
 
-void CMain::DrawRules(Gdiplus::Graphics& graphics){
-  Gdiplus::FontFamily ff(L"Consolas");
-  Gdiplus::Font font(&ff, 16, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+void CMain::DrawRules(Gdiplus::Graphics& graphics, Gdiplus::PointF p){
   Gdiplus::SolidBrush brush(Gdiplus::Color::DarkCyan);
-  Gdiplus::PointF point(10.0f, 10.0f);
 
   std::wstring temp = m_cLSystem.GetRuleString();
   temp += std::to_wstring(m_cLSystem.GetGenerations()) + L" generations\n";
 
-  graphics.DrawString(temp.c_str(), -1, &font, point, &brush);
+  graphics.DrawString(temp.c_str(), -1, m_pFont, p, &brush);
 } //DrawRules
 
 /// Use turtle graphics to draw the shape corresponding to the generated string
-/// to the bitmap. The *dirty rectangle* (the smallest rectangle that contains
-/// all of the non-transparent pixels) is calculated and stored also.
+/// to the bitmap while calculating the *dirty rectangle* (the smallest
+/// rectangle that contains all of the non-transparent pixels).
 /// \param d Turtle graphics descriptor.
 
 void CMain::Draw(const TurtleDesc& d){
@@ -213,22 +237,16 @@ void CMain::Draw(const TurtleDesc& d){
   m_rectDirty.bottom += delta;
 } //Draw
 
-/// Draw the image from the generated string to the bitmap using turtle graphics.
-/// The *dirty rectangle* (the smallest rectangle that contains all of the
-/// non-transparent pixels) is calculated and stored also. This version of the
-/// function constructs a hard-coded turtle graphics appropriate to the
-/// current type.
+/// Use turtle graphics to draw the shape corresponding to the generated string
+/// to the bitmap while calculating the *dirty rectangle* (the smallest
+/// rectangle that contains all of the non-transparent pixels). This version of
+/// the function constructs a hard-coded turtle graphics descriptor appropriate
+/// to the current type and then uses Draw(const TurtleDesc&) to do the actual
+/// work.
 
 void CMain::Draw(){
   TurtleDesc d; //turtle graphics descriptor
   const float fDegToRad = (float)M_PI/180.0f; //degrees to radians
-
-  switch(m_eLineThickness){
-    case LineThickness::Thin:   d.m_fPointSize = 1.0f; break;
-    case LineThickness::Thick:  d.m_fPointSize = 2.0f; break;
-
-    default: d.m_fPointSize = 1.0f; break; 
-  } //switch
   
   const float midx = 0.5f*m_pBitmap->GetWidth();
   const float midy = 0.5f*m_pBitmap->GetHeight();
@@ -271,15 +289,8 @@ void CMain::Draw(){
     break;
   } //switch
   
-  // line thickness
+  d.m_fPointSize = m_bThickLines? 2.0f: 1.0f;
 
-  switch(m_eLineThickness){
-    case LineThickness::Thin:   d.m_fPointSize = 1.0f; break;
-    case LineThickness::Thick:  d.m_fPointSize = 2.0f; break;
-
-    default: d.m_fPointSize = 1.0f; break; 
-  } //switch
-  
   Draw(d);
   InvalidateRect(m_hWnd, nullptr, TRUE);
 } //Draw
@@ -300,9 +311,9 @@ void CMain::CreateMenus(){
   //set the FILE menu
 
   m_hFileMenu = CreateMenu();
-  AppendMenuW(m_hFileMenu, MF_STRING, IDM_FILE_GENERATE, L"&Generate");
-  AppendMenuW(m_hFileMenu, MF_STRING, IDM_FILE_SAVE, L"&Save...");
-  AppendMenuW(m_hFileMenu, MF_STRING, IDM_FILE_QUIT, L"&Quit");
+  AppendMenuW(m_hFileMenu, MF_STRING, IDM_FILE_GENERATE, L"Generate");
+  AppendMenuW(m_hFileMenu, MF_STRING, IDM_FILE_SAVE, L"Save...");
+  AppendMenuW(m_hFileMenu, MF_STRING, IDM_FILE_QUIT, L"Quit");
 
   AppendMenuW(hMenubar, MF_POPUP, (UINT_PTR)m_hFileMenu, L"&File");
 
@@ -311,24 +322,24 @@ void CMain::CreateMenus(){
   m_hLSMenu = CreateMenu();
   
   AppendMenuW(m_hLSMenu, MF_STRING, IDM_LSYS_PLANT_A,
-    L"&Plant-like (Fig. 1.24a)");
+    L"Plant-like (Fig. 1.24a)");
   AppendMenuW(m_hLSMenu, MF_STRING, IDM_LSYS_PLANT_B,
-    L"&Plant-like (Fig. 1.24b)");
+    L"Plant-like (Fig. 1.24b)");
   AppendMenuW(m_hLSMenu, MF_STRING, IDM_LSYS_PLANT_C,
-    L"&Plant-like (Fig. 1.24c)");
+    L"Plant-like (Fig. 1.24c)");
   AppendMenuW(m_hLSMenu, MF_STRING, IDM_LSYS_PLANT_D,
-    L"&Plant-like (Fig. 1.24d)");
+    L"Plant-like (Fig. 1.24d)");
   AppendMenuW(m_hLSMenu, MF_STRING, IDM_LSYS_PLANT_E,
-    L"&Plant-like (Fig. 1.24e)");
+    L"Plant-like (Fig. 1.24e)");
   AppendMenuW(m_hLSMenu, MF_STRING, IDM_LSYS_PLANT_F,
-    L"&Plant-like (Fig. 1.24f)");
+    L"Plant-like (Fig. 1.24f)");
   
   AppendMenuW(m_hLSMenu, MF_SEPARATOR, 0, nullptr);
 
   AppendMenuW(m_hLSMenu, MF_STRING, IDM_LSYS_BRANCHING,
-    L"&Stochastic branching (Fig. 1.27)");
+    L"Stochastic branching (Fig. 1.27)");
   AppendMenuW(m_hLSMenu, MF_STRING, IDM_LSYS_HEXGOSPER, 
-    L"&Hexagonal Gosper curve (Fig. 1.11a)");
+    L"Hexagonal Gosper curve (Fig. 1.11a)");
   
   AppendMenuW(hMenubar, MF_POPUP, (UINT_PTR)m_hLSMenu, L"&L-System");
 
@@ -336,12 +347,8 @@ void CMain::CreateMenus(){
   
   m_hViewMenu = CreateMenu();
 
-  AppendMenuW(m_hViewMenu, MF_STRING, IDM_VIEW_THINLINES,   L"&Thin lines");
-  AppendMenuW(m_hViewMenu, MF_STRING, IDM_VIEW_THICKLINES,  L"T&hick lines");
-  
-  AppendMenuW(m_hViewMenu, MF_SEPARATOR, 0, nullptr);
-
-  AppendMenuW(m_hViewMenu, MF_STRING, IDM_VIEW_RULES, L"&Show rules");
+  AppendMenuW(m_hViewMenu, MF_STRING, IDM_VIEW_THICKLINES,  L"Thick lines");
+  AppendMenuW(m_hViewMenu, MF_STRING, IDM_VIEW_RULES, L"Show rules");
 
   AppendMenuW(hMenubar, MF_POPUP, (UINT_PTR)m_hViewMenu, L"&View");
 
@@ -451,26 +458,50 @@ void CMain::SetType(UINT t){
   } //if
 } //SetType
 
-/// Set the line thickness for turtle graphics and redraw.
-/// \param width New line thickness.
+///// Set the line thickness for turtle graphics and redraw.
+///// \param width New line thickness.
+//
+//void CMain::SetLineThickness(LineThickness width){
+//  if(m_eLineThickness != width){ //if change in width
+//    m_eLineThickness = width; //set new line width
+//
+//    if(m_eLineThickness == LineThickness::Thin){  
+//      CheckMenuItem(m_hViewMenu, IDM_VIEW_THINLINES, MF_CHECKED);
+//      CheckMenuItem(m_hViewMenu, IDM_VIEW_THICKLINES, MF_UNCHECKED);
+//    } //if
+//
+//    else if(m_eLineThickness == LineThickness::Thick){  
+//      CheckMenuItem(m_hViewMenu, IDM_VIEW_THINLINES, MF_UNCHECKED);
+//      CheckMenuItem(m_hViewMenu, IDM_VIEW_THICKLINES, MF_CHECKED);
+//    } //else if
+//
+//    Draw(); //redraw with new line thickness
+//  } //if
+//} //SetLineThickness
 
-void CMain::SetLineThickness(LineThickness width){
-  if(m_eLineThickness != width){ //if change in width
-    m_eLineThickness = width; //set new line width
+void CMain::ToggleLineThickness(){
+  m_bThickLines = !m_bThickLines;
+  const UINT status = m_bThickLines? MF_CHECKED: MF_UNCHECKED;
+  CheckMenuItem(m_hViewMenu, IDM_VIEW_THICKLINES, status);
+  //InvalidateRect(m_hWnd, nullptr, TRUE);
+  Draw(); //redraw with new line thickness
+  
+  //if(m_eLineThickness != width){ //if change in width
+  //  m_eLineThickness = width; //set new line width
 
-    if(m_eLineThickness == LineThickness::Thin){  
-      CheckMenuItem(m_hViewMenu, IDM_VIEW_THINLINES, MF_CHECKED);
-      CheckMenuItem(m_hViewMenu, IDM_VIEW_THICKLINES, MF_UNCHECKED);
-    } //if
+  //  if(m_eLineThickness == LineThickness::Thin){  
+  //    CheckMenuItem(m_hViewMenu, IDM_VIEW_THINLINES, MF_CHECKED);
+  //    CheckMenuItem(m_hViewMenu, IDM_VIEW_THICKLINES, MF_UNCHECKED);
+  //  } //if
 
-    else if(m_eLineThickness == LineThickness::Thick){  
-      CheckMenuItem(m_hViewMenu, IDM_VIEW_THINLINES, MF_UNCHECKED);
-      CheckMenuItem(m_hViewMenu, IDM_VIEW_THICKLINES, MF_CHECKED);
-    } //else if
+  //  else if(m_eLineThickness == LineThickness::Thick){  
+  //    CheckMenuItem(m_hViewMenu, IDM_VIEW_THINLINES, MF_UNCHECKED);
+  //    CheckMenuItem(m_hViewMenu, IDM_VIEW_THICKLINES, MF_CHECKED);
+  //  } //else if
 
-    Draw(); //redraw with new line thickness
-  } //if
-} //SetLineThickness
+  //  Draw(); //redraw with new line thickness
+  //} //if
+} //
 
 /// Toggle the "show rules" flag. Set the checkmark on the menu entry
 /// and ask for a redraw of the window.
@@ -546,3 +577,40 @@ bool CMain::SaveImage(){
 const bool CMain::IsStochastic() const{
   return m_cLSystem.IsStochastic();
 } //IsStochastic
+
+/// Get the width of the widest line of the rule string in pixels. This will,
+/// of course, depend on the font. Finding the pixel width of a character in
+/// any given font is a black art, so the developers of GDI+ should (in my
+/// humble opinion) be given a back-pat for making this process so easy,
+/// not withstanding the number of new GDI+ concepts and functions that I had
+/// to grok before I could get this to work.
+/// \param graphics Reference to a GDI+ graphics object.
+/// \return The width of the rule string in pixels.
+
+int CMain::GetRuleStrWidth(Gdiplus::Graphics& graphics){
+  const std::wstring& strRules = m_cLSystem.GetRuleString(); //shorthand
+  const Gdiplus::RectF r = GetClientRectF(m_hWnd); //client rectangle
+  
+  const Gdiplus::CharacterRange charRange(0, (int)strRules.size());
+  Gdiplus::StringFormat sf;
+  sf.SetMeasurableCharacterRanges(1, &charRange);
+
+  const int n = sf.GetMeasurableCharacterRangeCount();
+  Gdiplus::Region* rg = new Gdiplus::Region[n]; //array of regions
+  graphics.MeasureCharacterRanges(strRules.c_str(), -1, m_pFont, r, &sf, n, rg);
+
+  //find the maximum region width in pixels
+
+  int width = 0; //return result
+
+  for(int i=0; i<n; i++){ //for each region
+    Gdiplus::Rect r; //for bounding rectangle of current region
+    rg[i].GetBounds(&r, &graphics); //get bounding rectangle of current region
+    width = max(width, r.Width); //see if current region width is largest so far
+  } //for
+
+  //cleanup and exit
+
+  delete [] rg;
+  return width;
+} //GetRuleStrWidth
