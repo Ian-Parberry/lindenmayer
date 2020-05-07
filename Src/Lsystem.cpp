@@ -86,15 +86,13 @@ void LSystem::AddRule(const LProduction& rule){
   m_strRuleString += L"\n"; //end rule
 } //AddRule
 
-/// Set the root, that is, store it in m_strRoot and add it to the rule string
-/// for display. Since it appended to the rule string, it's probably best
-/// (although not required) that you call this function before any calls
-/// to AddRule().
+/// Set the root, that is, store it in `m_strRoot` and prepend it to the rule
+/// string for display. 
 /// \param omega The new root.
 
 void LSystem::SetRoot(const std::wstring& omega){
   m_strRoot = omega; //set the root
-  m_strRuleString += L"Root is " + omega + L"\n"; //add to rule string
+  m_strRuleString = L"Root is " + omega + L"\n" + m_strRuleString; //prepend
 } //SetRoot
 
 /// Clear the rules, the rule string, the root string, the generation buffers,

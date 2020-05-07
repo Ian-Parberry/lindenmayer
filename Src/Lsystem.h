@@ -58,14 +58,14 @@ class LProduction{
 
 /// \brief A stochastic bracketed context-free L-system.
 ///
-/// This prototype context-free stochastic bracketed L-system can be used to
+/// This basic context-free stochastic bracketed L-system can be used to
 /// re-create some of the line drawings in ABOP. The productions are stored
-/// in a `std::map<char, std::vector<LProduction>>` m_mapRules which maps the
+/// in a `std::map<char, std::vector<LProduction>>` which maps the
 /// left-hand side of a production to an `std::vector` of the productions that 
 /// have that left-hand side. A text string m_strRuleString is used to store
-/// a printable rule table in text form for display purposes only.
-/// Double-buffering in `m_strBuffer[2]` is used to generate the result string
-/// m_pResult.
+/// a printable rule string in text form which is used to display the rules
+/// on the window. Double-buffering in `m_strBuffer[2]` is used to generate the
+/// result string `m_pResult`.
 
 class LSystem{
   private: 
