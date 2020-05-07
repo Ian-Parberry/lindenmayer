@@ -12,6 +12,5 @@ var searchData=
   ['idm_5flsys_5fplant_5fe',['IDM_LSYS_PLANT_E',['../_windows_helpers_8h.html#aec22b1160e1dbff6d499de63d002093e',1,'WindowsHelpers.h']]],
   ['idm_5flsys_5fplant_5ff',['IDM_LSYS_PLANT_F',['../_windows_helpers_8h.html#a5d97fc5ec58102d83c06b42fd45b8fb2',1,'WindowsHelpers.h']]],
   ['idm_5fview_5frules',['IDM_VIEW_RULES',['../_windows_helpers_8h.html#a9887115de36c8e9c87308e37423a1f3d',1,'WindowsHelpers.h']]],
-  ['idm_5fview_5fthicklines',['IDM_VIEW_THICKLINES',['../_windows_helpers_8h.html#a19b1c07ec67cb810334295d6f3b4454f',1,'WindowsHelpers.h']]],
-  ['idm_5fview_5fthinlines',['IDM_VIEW_THINLINES',['../_windows_helpers_8h.html#a49f0675d418d1f5663bb2bf4aa416876',1,'WindowsHelpers.h']]]
+  ['idm_5fview_5fthicklines',['IDM_VIEW_THICKLINES',['../_windows_helpers_8h.html#a19b1c07ec67cb810334295d6f3b4454f',1,'WindowsHelpers.h']]]
 ];

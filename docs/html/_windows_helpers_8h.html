@@ -137,10 +137,6 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_windows_helpers_8h.html#a9887115de36c8e9c87308e37423a1f3d">IDM_VIEW_RULES</a>&#160;&#160;&#160;12</td></tr>
 <tr class="memdesc:a9887115de36c8e9c87308e37423a1f3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Menu id for showing current rules. <br /></td></tr>
 <tr class="separator:a9887115de36c8e9c87308e37423a1f3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49f0675d418d1f5663bb2bf4aa416876"><td class="memItemLeft" align="right" valign="top"><a id="a49f0675d418d1f5663bb2bf4aa416876"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_windows_helpers_8h.html#a49f0675d418d1f5663bb2bf4aa416876">IDM_VIEW_THINLINES</a>&#160;&#160;&#160;13</td></tr>
-<tr class="memdesc:a49f0675d418d1f5663bb2bf4aa416876"><td class="mdescLeft">&#160;</td><td class="mdescRight">Menu id for thin lines. <br /></td></tr>
-<tr class="separator:a49f0675d418d1f5663bb2bf4aa416876"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19b1c07ec67cb810334295d6f3b4454f"><td class="memItemLeft" align="right" valign="top"><a id="a19b1c07ec67cb810334295d6f3b4454f"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_windows_helpers_8h.html#a19b1c07ec67cb810334295d6f3b4454f">IDM_VIEW_THICKLINES</a>&#160;&#160;&#160;14</td></tr>
 <tr class="memdesc:a19b1c07ec67cb810334295d6f3b4454f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Menu id for thick lines. <br /></td></tr>
@@ -163,6 +159,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a4b916ee29373a9ab75f3ca5c039d8fbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_windows_helpers_8h.html#a4b916ee29373a9ab75f3ca5c039d8fbf">AddPointToRect</a> (RECT &amp;r, Gdiplus::PointF point)</td></tr>
 <tr class="memdesc:a4b916ee29373a9ab75f3ca5c039d8fbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add point to rectangle.  <a href="#a4b916ee29373a9ab75f3ca5c039d8fbf">More...</a><br /></td></tr>
 <tr class="separator:a4b916ee29373a9ab75f3ca5c039d8fbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c82fd93a773c3090fd2084f9655596c"><td class="memItemLeft" align="right" valign="top">Gdiplus::RectF&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_windows_helpers_8h.html#a0c82fd93a773c3090fd2084f9655596c">GetClientRectF</a> (HWND hwnd)</td></tr>
+<tr class="memdesc:a0c82fd93a773c3090fd2084f9655596c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get client rectangle.  <a href="#a0c82fd93a773c3090fd2084f9655596c">More...</a><br /></td></tr>
+<tr class="separator:a0c82fd93a773c3090fd2084f9655596c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0758196f560d0f8cc6a65830e1b1f0ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_windows_helpers_8h.html#a0758196f560d0f8cc6a65830e1b1f0ad">ForceMinWinSize</a> (HWND hwnd, WPARAM wParam, RECT *pRect, int n)</td></tr>
+<tr class="memdesc:a0758196f560d0f8cc6a65830e1b1f0ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enforce minimum window size.  <a href="#a0758196f560d0f8cc6a65830e1b1f0ad">More...</a><br /></td></tr>
+<tr class="separator:a0758196f560d0f8cc6a65830e1b1f0ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>These platform-dependent functions are hidden away so that the faint-of-heart don't have to see them if they're offended by them. </p>
@@ -203,6 +205,84 @@ Functions</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="_windows_helpers_8cpp_source.html#l00176">176</a> of file <a class="el" href="_windows_helpers_8cpp_source.html">WindowsHelpers.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a0758196f560d0f8cc6a65830e1b1f0ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0758196f560d0f8cc6a65830e1b1f0ad">&#9670;&nbsp;</a></span>ForceMinWinSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ForceMinWinSize </td>
+          <td>(</td>
+          <td class="paramtype">HWND&#160;</td>
+          <td class="paramname"><em>hwnd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">WPARAM&#160;</td>
+          <td class="paramname"><em>wParam</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RECT *&#160;</td>
+          <td class="paramname"><em>pRect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Enforce a minimum width and height for the client area of the window in response to a WM_SIZING message. This function resizes the drag rectangle provided by the WM_SIZING message. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hwnd</td><td>Window handle. </td></tr>
+    <tr><td class="paramname">wParam</td><td>WMSZ message telling us which edge is being dragged on. </td></tr>
+    <tr><td class="paramname">pRect</td><td>[IN, OUT] Pointer to drag rectangle. </td></tr>
+    <tr><td class="paramname">n</td><td>Minimum width and height of client area. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_windows_helpers_8cpp_source.html#l00203">203</a> of file <a class="el" href="_windows_helpers_8cpp_source.html">WindowsHelpers.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a0c82fd93a773c3090fd2084f9655596c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c82fd93a773c3090fd2084f9655596c">&#9670;&nbsp;</a></span>GetClientRectF()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Gdiplus::RectF GetClientRectF </td>
+          <td>(</td>
+          <td class="paramtype">HWND&#160;</td>
+          <td class="paramname"><em>hwnd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get client rectangle in <code>Gdiplus::RectF</code> format. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hwnd</td><td>Window handle. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Client rectangle of that window. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_windows_helpers_8cpp_source.html#l00187">187</a> of file <a class="el" href="_windows_helpers_8cpp_source.html">WindowsHelpers.cpp</a>.</p>
 
 </div>
 </div>
@@ -338,7 +418,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 5 2020 13:23:37 for Lindenmayer System by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu May 7 2020 12:18:16 for Lindenmayer System by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

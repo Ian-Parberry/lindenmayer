@@ -88,7 +88,7 @@ $(function() {
 <h2>How to Use It </h2>
 <p>The user interface consists of three drop-down menus, <code>File</code>, <code>L-System</code>, and <code>View</code>.</p>
 <div class="image">
-<img src="screenshot0.png" alt="screenshot0.png" width="242"/>
+<img src="screenshot0.png" alt="screenshot0.png" width="300"/>
 </div>
 <p>The <code>File</code> menu lets you <code>Generate</code> a new image (stochastic L-systems only), <code>Save</code> the current image, or <code>Quit</code> the application. <code>Generate</code> will be disabled for non-stochastic L-systems. Saved images will be clipped to the image (that is, they will be exactly as big as they need to be) with a transparent background in PNG format, using the same line thickness as the image displayed in the window.</p>
 <div class="image">
@@ -98,13 +98,13 @@ $(function() {
 <div class="image">
 <img src="LsMenu.png" alt="LsMenu.png" width="320"/>
 </div>
-<p>The <code>View</code> menu lets you enable or disable the display of the L-system rules in the top-left corner of the window and select <code>Thin lines</code> or <code>Thick lines</code>. Once again, check marks will appear next to the current selections. Note that the rules text will not appear in any saved image whether or not <code>Show rules</code> is selected.</p>
+<p>The <code>View</code> menu lets you enable or disable drawing with <code>Thick lines</code>, and the display of the L-system rules in the top-left corner of the window. Check marks will appear next to enabled selections. For example, the following image has <code>Show rules</code> enabled and <code>Thick lines</code> disabled. Note that the rules text will not appear in any saved image whether or not <code>Show rules</code> is selected.</p>
 <div class="image">
 <img src="ViewMenu.png" alt="ViewMenu.png" width="172"/>
 </div>
-<p>The screenshot below left has <code>Show rules</code> and <code>Thin lines</code> selected, while the one on the right has <code>Show rules</code> deselected and <code>Thick lines</code> selected.</p>
+<p>The screenshot below left has <code>Show rules</code> enabled and <code>Thick lines</code> disabled, and the one on the right has <code>Show rules</code> disabled and <code>Thick lines</code> enabled.</p>
 <div class="image">
-<img src="screenshot.png" alt="screenshot.png" width="800"/>
+<img src="screenshot.png" alt="screenshot.png" width="630"/>
 </div>
 <h2>Code Overview </h2>
 <p>It is assumed that the reader is familiar with the basics of Windows programming such as <code>WinMain</code>, the Window procedure, message passing, dialog boxes, and drop-down menus. The code relies heavily on containers from <code>namespace std</code>, specifically, <code>std::string</code>, <code>std::wstring</code>, <code>std::stack</code>, <code>std::map</code>, and <code>std::vector</code>. <a class="el" href="_main_8cpp.html" title="The window procedure WndProc(), and wWinMain(). ">Main.cpp</a> contains the mandatory Windows functions <a class="el" href="_main_8cpp.html#aeeb116aec1e9017291d3924e27a15d31" title="The main entry point for this application. ">wWinMain()</a> and a Window procedure <a class="el" href="_main_8cpp.html#a30a1e3b0304f1b083637664cbda94e72" title="Window procedure. ">WndProc()</a>, which share a single global variable <code>static CMain* g_pMain</code>. Most of the other gnarly Windows-specific code is hidden away in <a class="el" href="_windows_helpers_8cpp.html" title="Code for some helpful Windows-specific functions. ">WindowsHelpers.cpp</a>.</p>
@@ -128,7 +128,7 @@ $(function() {
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 5 2020 13:23:37 for Lindenmayer System by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu May 7 2020 12:18:16 for Lindenmayer System by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

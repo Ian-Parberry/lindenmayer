@@ -141,7 +141,7 @@ static <a class="el" href="class_c_main.html">CMain</a> *&#160;</td><td class="m
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This is the handler for messages from the operating system. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>This is the handler for messages from the operating system. This function assumes that the menu IDs for the <code>L-System</code> menu are consecutive and run from <code>IDM_LSYS_BRANCHING</code> to <code>IDM_LSYS_HEXGOSPER</code> (see <a class="el" href="_windows_helpers_8h.html" title="Interface for some helpful Windows-specific functions. ">WindowsHelpers.h</a>). </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">hWnd</td><td>Window handle. </td></tr>
     <tr><td class="paramname">message</td><td>Message code. </td></tr>
@@ -152,7 +152,7 @@ static <a class="el" href="class_c_main.html">CMain</a> *&#160;</td><td class="m
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 If message is handled. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_main_8cpp_source.html#l00039">39</a> of file <a class="el" href="_main_8cpp_source.html">Main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_main_8cpp_source.html#l00041">41</a> of file <a class="el" href="_main_8cpp_source.html">Main.cpp</a>.</p>
 
 </div>
 </div>
@@ -193,7 +193,7 @@ static <a class="el" href="class_c_main.html">CMain</a> *&#160;</td><td class="m
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The main entry point for this application. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Initialize a window and start the message pump. This is the main entry point for this application. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">hInstance</td><td>Handle to the current instance of this application. </td></tr>
     <tr><td class="paramname">hPrevInstance</td><td>Unused. </td></tr>
@@ -204,14 +204,14 @@ static <a class="el" href="class_c_main.html">CMain</a> *&#160;</td><td class="m
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 If this application terminates correctly, otherwise an error code. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_main_8cpp_source.html#l00114">114</a> of file <a class="el" href="_main_8cpp_source.html">Main.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_main_8cpp_source.html#l00119">119</a> of file <a class="el" href="_main_8cpp_source.html">Main.cpp</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 5 2020 13:23:37 for Lindenmayer System by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu May 7 2020 12:18:16 for Lindenmayer System by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

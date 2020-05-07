@@ -33,7 +33,7 @@
 /// The user interface consists of three drop-down menus, `File`,
 /// `L-System`, and `View`. 
 ///
-/// \image html screenshot0.png width=242
+/// \image html screenshot0.png width=300
 ///
 /// The `File` menu lets you `Generate` a new image (stochastic L-systems only),
 /// `Save` the current image, or `Quit` the application. `Generate`
@@ -49,19 +49,21 @@
 ///
 /// \image html LsMenu.png width=320
 ///
-/// The `View` menu lets you enable or disable the display of the L-system rules in the
-/// top-left corner of the window and select `Thin lines` or `Thick lines`. Once again,
-/// check marks will appear next to the current selections. Note that
+/// The `View` menu lets you enable or disable drawing with `Thick lines`, and the
+/// display of the L-system rules in the top-left corner of the window.
+/// Check marks will appear next to enabled selections. For example, the following
+/// image has `Show rules` enabled and `Thick lines` disabled.
+/// Note that
 /// the rules text will not appear in any saved image whether or not `Show rules` is
 /// selected.
 ///
 /// \image html ViewMenu.png width=172
 ///
-/// The screenshot below left has `Show rules` and `Thin lines` selected, while the one
-/// on the right has `Show rules` deselected and `Thick lines`
-/// selected.
+/// The screenshot below left has `Show rules` enabled and `Thick lines` disabled,
+/// and the one on the right has `Show rules` disabled and `Thick lines`
+/// enabled.
 ///
-/// \image html screenshot.png width=800
+/// \image html screenshot.png width=630
 ///
 /// Code Overview
 /// -------------
