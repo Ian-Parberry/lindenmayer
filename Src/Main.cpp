@@ -55,10 +55,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 	    ForceMinWinSize(hWnd, wParam, (RECT*)lParam, 320);
 	    return 0;
 
-    case WM_SIZE: //window has been resized
-      InvalidateRect(hWnd, nullptr, TRUE);
-      return 0;
-
     case WM_PAINT: //window needs to be redrawn
       g_pMain->OnPaint();
       return 0;
@@ -82,10 +78,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
         case IDM_FILE_SAVE: //save bitmap to image file
           g_pMain->SaveImage();
           break;
-
-        //case IDM_VIEW_THINLINES: //draw with thin lines
-        //  g_pMain->SetLineThickness(LineThickness::Thin);
-        //  break;
 
         case IDM_VIEW_THICKLINES: //draw with thick lines
           g_pMain->ToggleLineThickness();

@@ -79,7 +79,6 @@ class CMain{
 
     void OnPaint(); ///< Paint the client area.
     void SetType(UINT t); ///< Set type.
-    //void SetLineThickness(LineThickness width); ///< Set line thickness.
     bool SaveImage(); ///< Save image to a file.
 
     const bool IsStochastic() const; ///< Is a stochastic L-system.

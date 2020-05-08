@@ -118,8 +118,7 @@ void CMain::OnPaint(){
 
   //fill client area with white background
 
-  Gdiplus::SolidBrush brush(Gdiplus::Color::White);
-  graphics.FillRectangle(&brush, 0, 0, nClientWidth, nClientHt);
+  graphics.Clear(Gdiplus::Color::White); //white background
 
   //draw the dirty rectangle of the bitmap to the center of the client area
 
@@ -458,53 +457,18 @@ void CMain::SetType(UINT t){
   } //if
 } //SetType
 
-///// Set the line thickness for turtle graphics and redraw.
-///// \param width New line thickness.
-//
-//void CMain::SetLineThickness(LineThickness width){
-//  if(m_eLineThickness != width){ //if change in width
-//    m_eLineThickness = width; //set new line width
-//
-//    if(m_eLineThickness == LineThickness::Thin){  
-//      CheckMenuItem(m_hViewMenu, IDM_VIEW_THINLINES, MF_CHECKED);
-//      CheckMenuItem(m_hViewMenu, IDM_VIEW_THICKLINES, MF_UNCHECKED);
-//    } //if
-//
-//    else if(m_eLineThickness == LineThickness::Thick){  
-//      CheckMenuItem(m_hViewMenu, IDM_VIEW_THINLINES, MF_UNCHECKED);
-//      CheckMenuItem(m_hViewMenu, IDM_VIEW_THICKLINES, MF_CHECKED);
-//    } //else if
-//
-//    Draw(); //redraw with new line thickness
-//  } //if
-//} //SetLineThickness
+/// Toggle the line thickness flag. Set the checkmark on the menu entry
+/// and ask for a redraw of the window.
 
 void CMain::ToggleLineThickness(){
   m_bThickLines = !m_bThickLines;
   const UINT status = m_bThickLines? MF_CHECKED: MF_UNCHECKED;
   CheckMenuItem(m_hViewMenu, IDM_VIEW_THICKLINES, status);
-  //InvalidateRect(m_hWnd, nullptr, TRUE);
   Draw(); //redraw with new line thickness
-  
-  //if(m_eLineThickness != width){ //if change in width
-  //  m_eLineThickness = width; //set new line width
+} //ToggleLineThickness
 
-  //  if(m_eLineThickness == LineThickness::Thin){  
-  //    CheckMenuItem(m_hViewMenu, IDM_VIEW_THINLINES, MF_CHECKED);
-  //    CheckMenuItem(m_hViewMenu, IDM_VIEW_THICKLINES, MF_UNCHECKED);
-  //  } //if
-
-  //  else if(m_eLineThickness == LineThickness::Thick){  
-  //    CheckMenuItem(m_hViewMenu, IDM_VIEW_THINLINES, MF_UNCHECKED);
-  //    CheckMenuItem(m_hViewMenu, IDM_VIEW_THICKLINES, MF_CHECKED);
-  //  } //else if
-
-  //  Draw(); //redraw with new line thickness
-  //} //if
-} //
-
-/// Toggle the "show rules" flag. Set the checkmark on the menu entry
-/// and ask for a redraw of the window.
+/// Toggle the show rules flag. Set the checkmark on the menu entry
+/// and ask for a refresh of the window.
 
 void CMain::ToggleShowRules(){
   m_bShowRules = !m_bShowRules;

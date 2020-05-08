@@ -62,8 +62,8 @@ void InitWindow(HINSTANCE hInst, INT nShow, WNDPROC WndProc){
   const DWORD dwStyle = WS_CAPTION | WS_MINIMIZEBOX | WS_THICKFRAME | WS_SYSMENU; 
   const DWORD dwStyleEx = WS_EX_APPWINDOW | WS_EX_DLGMODALFRAME;
 
-  const int w = 800; //window client area width.
-  const int h = 800; //window client area height.
+  const int w = 600; //window client area width.
+  const int h = 600; //window client area height.
     
   RECT r;  
   r.left = 0; r.right = w; 
