@@ -40,6 +40,7 @@ static CMain* g_pMain = nullptr; ///< Pointer to the main class.
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
   UINT nMenuId = 0; //menu identifier for menu command messages
+  static bool bResizing = false;
 
   switch(message){
     case WM_CREATE: //window has been created
@@ -52,7 +53,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
       return 0;
       
     case WM_SIZING: //user is resizing the window
-	    ForceMinWinSize(hWnd, wParam, (RECT*)lParam, 320);
+	    ForceMinWinSize(hWnd, wParam, (RECT*)lParam, 320); //enforce minimum size
 	    return 0;
 
     case WM_PAINT: //window needs to be redrawn

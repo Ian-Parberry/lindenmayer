@@ -31,8 +31,7 @@
 
 #pragma region Constructors and destructors
 
-/// Initialize GDI+, create a font for drawing text on the window, create a
-/// bitmap and a graphics object open on that bitmap, create the menus, 
+/// Initialize GDI+, create a font for drawing text, create the menus, 
 /// initialize the check marks on the various menu entries, gray out the
 /// `Generate` entry in the `File` menu if necessary, create the initial
 /// L-system rules, generate the initial string from those rules, then draw
@@ -47,15 +46,6 @@ CMain::CMain(const HWND hwnd):
   m_pFontFamily = new Gdiplus::FontFamily(L"Consolas");
   m_pFont = new Gdiplus::Font(m_pFontFamily, 14, Gdiplus::FontStyleRegular,
     Gdiplus::UnitPixel);
-
-  //make the bitmap much larger than it needs to be
-  
-  const int w = 3000; //bitmap width
-  const int h = 3000; //bitmap height
-
-  m_pBitmap = new Gdiplus::Bitmap(w, h, PixelFormat32bppARGB);  
-  m_pGraphics = new Gdiplus::Graphics(m_pBitmap);
-  m_pGraphics->SetSmoothingMode(Gdiplus::SmoothingModeHighQuality);
 
   SetRules(); //create the first set of rules
 
@@ -80,7 +70,6 @@ CMain::CMain(const HWND hwnd):
 /// Delete all GDI+ objects, then shut down GDI+.
 
 CMain::~CMain(){
-  delete m_pGraphics;
   delete m_pBitmap;
   delete m_pFontFamily;
   delete m_pFont;
@@ -95,9 +84,8 @@ CMain::~CMain(){
 
 #pragma region Drawing functions
 
-/// Draw the dirty rectangle from the bitmap to the window client area, scaled
-/// down if necessary. This function will only be called in response to a
-/// WM_PAINT message.
+/// Draw the bitmap to the window client area, scaled down if necessary.
+/// This function should only be called in response to a WM_PAINT message.
 
 void CMain::OnPaint(){
   PAINTSTRUCT ps; //paint structure
@@ -106,8 +94,8 @@ void CMain::OnPaint(){
 
   //dirty rectangle width and height
   
-  const int nDirtyWidth = m_rectDirty.right  - m_rectDirty.left; 
-  const int nDirtyHt    = m_rectDirty.bottom - m_rectDirty.top; 
+  const int w = m_pBitmap->GetWidth(); 
+  const int h = m_pBitmap->GetHeight(); 
 
   //get client rectangle
 
@@ -116,34 +104,29 @@ void CMain::OnPaint(){
   const int nClientWidth = rectClient.right - rectClient.left; //client width
   const int nClientHt = rectClient.bottom - rectClient.top; //client height
 
-  //fill client area with white background
-
-  graphics.Clear(Gdiplus::Color::White); //white background
-
-  //draw the dirty rectangle of the bitmap to the center of the client area
+  //draw the bitmap to the center of the client area
 
   int textwidth = m_bShowRules? (int)std::ceil(GetRuleStrWidth(graphics)): 0;
 
   const int margin = 10; //default margin
 
   const float xscale = float(nClientWidth
-    - (textwidth > 0? 3: 2)*margin - textwidth)/nDirtyWidth;
-  const float yscale = float(nClientHt - 2*margin)/nDirtyHt;
+    - (textwidth > 0? 3: 2)*margin - textwidth)/w;
+  const float yscale = float(nClientHt - 2*margin)/h;
   const float scale = min(min(xscale, yscale), 1);
 
   Gdiplus::Rect rectDest;
 
-  rectDest.Width  = (int)std::floor(scale*nDirtyWidth);
-  rectDest.Height = (int)std::floor(scale*nDirtyHt);
+  rectDest.Width  = (int)std::floor(scale*w);
+  rectDest.Height = (int)std::floor(scale*h);
 
   rectDest.X = max(2*margin + textwidth, 
     (nClientWidth - rectDest.Width + textwidth)/2);
   rectDest.Y = max(margin, (nClientHt - rectDest.Height)/2);
   
-  graphics.DrawImage(m_pBitmap, rectDest, m_rectDirty.left, m_rectDirty.top,
-    nDirtyWidth, nDirtyHt, Gdiplus::UnitPixel);
+  graphics.DrawImage(m_pBitmap, rectDest);
 
- //draw the rules on the screen (note: NOT on the bitmap)
+  //draw the rules on the screen (note: NOT on the bitmap)
 
   if(m_bShowRules)
     DrawRules(graphics, Gdiplus::PointF(margin, margin)); 
@@ -170,13 +153,14 @@ void CMain::DrawRules(Gdiplus::Graphics& graphics, Gdiplus::PointF p){
 /// \param d Turtle graphics descriptor.
 
 void CMain::Draw(const TurtleDesc& d){
+  const std::wstring& s = m_cLSystem.GetString(); //shorthand for generated string
   std::stack<StackFrame> stack; //stack frame
 
   //prepare to draw
-  
-  m_pGraphics->Clear(Gdiplus::Color::Transparent); //transparent background
 
-  Gdiplus::PointF ptCurPos = d.m_ptStart; //current position
+  Gdiplus::Graphics* pGraphics = nullptr;
+
+  Gdiplus::PointF ptCur; //current position, the start of the line
   float angle = 0; //current orientation
   float len = d.m_fLength; //current branch length
     
@@ -185,55 +169,77 @@ void CMain::Draw(const TurtleDesc& d){
   
   //initialize the dirty rectangle to the start pixel
 
-  m_rectDirty.left   = int(std::floor(ptCurPos.X)); 
-  m_rectDirty.right  = int(std::ceil (ptCurPos.X)); 
-  m_rectDirty.top    = int(std::floor(ptCurPos.Y)); 
-  m_rectDirty.bottom = int(std::ceil (ptCurPos.Y)); 
+  RECT r;
 
-  const std::wstring& s = m_cLSystem.GetString(); //shorthand for generated string
+  r.left   = int(std::floor(ptCur.X)); 
+  r.right  = int(std::ceil (ptCur.X)); 
+  r.top    = int(std::floor(ptCur.Y)); 
+  r.bottom = int(std::ceil (ptCur.Y)); 
 
-  //loop through characters of the string s, performing turtle graphics
+  //measure once, draw once
 
-  for(size_t i=0; i<s.size(); i++){ 
-    Gdiplus::PointF ptNextPos;
+  for(int i: {0, 1}){ //i==0 means measure, i==1 means draw
+    for(size_t j=0; j<s.size(); j++){ //loop through characters of s
+      Gdiplus::PointF ptNext; //next position (the end of the line)
 
-    switch(s[i]){ 
-      case 'L':
-      case 'R':
-      case 'F':
-        ptNextPos = ptCurPos - Gdiplus::PointF(-len*sinf(angle), len*cosf(angle));
-        m_pGraphics->DrawLine(&pen, ptCurPos, ptNextPos);
-        ptCurPos = ptNextPos;
-
-        AddPointToRect(m_rectDirty, ptNextPos);
-      break; 
-
-      case '+': angle -= d.m_fAngleDelta; break;
-      case '-': angle += d.m_fAngleDelta; break;
-
-      case '[': 
-        stack.push(StackFrame(ptCurPos, angle, len)); 
-        len *= d.m_fLenMultiplier;
-      break;
-
-      case ']': {
-        const StackFrame& sf = stack.top();
+      switch(s[j]){ 
+        case 'L':
+        case 'R':
+        case 'F':
+          ptNext = ptCur - Gdiplus::PointF(-len*sinf(angle), len*cosf(angle));
           
-        ptCurPos = sf.m_ptPos;
-        angle    = sf.m_fAngle;
-        len      = sf.m_fLength;
+          if(i == 0)AddPointToRect(r, ptNext); //measure
+          else pGraphics->DrawLine(&pen, ptCur, ptNext); //draw
+          
+          ptCur = ptNext;
+        break; 
 
-        stack.pop(); //this must be last, obviously
-      } //case
-      break;
-    } //switch
+        case '+': angle -= d.m_fAngleDelta; break;
+        case '-': angle += d.m_fAngleDelta; break;
+
+        case '[': 
+          stack.push(StackFrame(ptCur, angle, len)); 
+          len *= d.m_fLenMultiplier;
+        break;
+
+        case ']': {
+          const StackFrame& sf = stack.top();
+          
+          ptCur = sf.m_ptPos;
+          angle    = sf.m_fAngle;
+          len      = sf.m_fLength;
+
+          stack.pop(); //this must be last, obviously
+        } //case
+        break;
+      } //switch
+    } //for
+
+    if(i == 0){ //done measuring, prepare for drawing
+      delete m_pBitmap;
+      
+      //make the dirty rectangle slightly larger to include lines on the edge
+
+      const int delta = (int)std::ceil(d.m_fPointSize/2.0f); //amount to add
+      r.right  += delta;
+      r.bottom += delta;
+
+      //create new bitmap of exactly the right size
+
+      const int w = r.right - r.left;
+      const int h = r.bottom - r.top;
+      m_pBitmap = new Gdiplus::Bitmap(w, h, PixelFormat32bppARGB); 
+      ptCur = Gdiplus::PointF(-(float)r.left, -(float)r.top);
+
+      //create graphics object open on bitmap for drawing in the next iteration
+
+      pGraphics = new Gdiplus::Graphics(m_pBitmap);
+      pGraphics->SetSmoothingMode(Gdiplus::SmoothingModeHighQuality);
+      pGraphics->Clear(Gdiplus::Color::Transparent); //transparent background
+    } //if
   } //for
 
-  //make the dirty rectangle slightly larger to include lines on the edge
-
-  const int delta = (int)std::ceil(d.m_fPointSize/2.0f); //amount to add
-  m_rectDirty.right  += delta;
-  m_rectDirty.bottom += delta;
+  delete pGraphics; //clean up
 } //Draw
 
 /// Use turtle graphics to draw the shape corresponding to the generated string
@@ -245,47 +251,17 @@ void CMain::Draw(const TurtleDesc& d){
 
 void CMain::Draw(){
   TurtleDesc d; //turtle graphics descriptor
-  const float fDegToRad = (float)M_PI/180.0f; //degrees to radians
-  
-  const float midx = 0.5f*m_pBitmap->GetWidth();
-  const float midy = 0.5f*m_pBitmap->GetHeight();
-  const float bottomy = m_pBitmap->GetHeight() - 64.0f;
-  
-  const Gdiplus::PointF ptBottomCenter(midx, bottomy);
-  const Gdiplus::PointF ptMidCenter(midx, midy);
 
   switch(m_nType){ //the angle deltas are cribbed from ABOP
-    case IDM_LSYS_PLANT_A:
-      d = TurtleDesc(ptBottomCenter, fDegToRad*22.7f, 8.0f);
-    break;
+    case IDM_LSYS_PLANT_A: d = TurtleDesc(22.7f, 8.0f);  break;
+    case IDM_LSYS_PLANT_B: d = TurtleDesc(20.0f, 20.0f); break;
+    case IDM_LSYS_PLANT_C: d = TurtleDesc(22.5f, 12.0f); break;
+    case IDM_LSYS_PLANT_D: d = TurtleDesc(20.0f, 5.0f);  break;
+    case IDM_LSYS_PLANT_E: d = TurtleDesc(25.7f, 5.0f);  break;
+    case IDM_LSYS_PLANT_F: d = TurtleDesc(22.5f, 16.0f); break;
 
-    case IDM_LSYS_PLANT_B:   
-      d = TurtleDesc(ptBottomCenter, fDegToRad*20.0f, 20.0f);
-    break;
-
-    case IDM_LSYS_PLANT_C:
-      d = TurtleDesc(ptBottomCenter, fDegToRad*22.5f, 12.0f);
-    break;
-
-    case IDM_LSYS_PLANT_D:
-      d = TurtleDesc(ptBottomCenter, fDegToRad*20.0f, 5.0f);
-    break;
-
-    case IDM_LSYS_PLANT_E: 
-      d = TurtleDesc(ptBottomCenter, fDegToRad*25.7f, 5.0f);
-    break;
-
-    case IDM_LSYS_PLANT_F:     
-      d = TurtleDesc(ptBottomCenter, fDegToRad*22.5f, 16.0f);
-    break;
-
-    case IDM_LSYS_BRANCHING:
-      d = TurtleDesc(ptBottomCenter, 0.37f, 8.0f);
-    break;
-
-    case IDM_LSYS_HEXGOSPER:
-      d = TurtleDesc(ptMidCenter, float(M_PI/3), 12.0f);
-    break;
+    case IDM_LSYS_BRANCHING: d = TurtleDesc(21.2f, 8.0f); break;
+    case IDM_LSYS_HEXGOSPER: d = TurtleDesc(60.0f, 12.0f); break;
   } //switch
   
   d.m_fPointSize = m_bThickLines? 2.0f: 1.0f;
@@ -508,28 +484,12 @@ void CMain::Generate(){
 
 bool CMain::SaveImage(){
   bool succeeded = false; //save succeeded
-
   std::wstring wstrFileName = GetSaveFileName(m_hWnd); //do the dialog box dance
   
   if(wstrFileName != L""){
-    CLSID pngClsid; //class id
-    GetEncoderClsid((WCHAR*)L"image/png", &pngClsid); //class id for PNG
-
-    //copy from the dirty rectangle to a new bitmap of exactly the right size
-    
-    const int w = m_rectDirty.right  - m_rectDirty.left; //dirty rectangle width
-    const int h = m_rectDirty.bottom - m_rectDirty.top;  //dirty rectangle height
-
-    //draw the dirty rectangle into a bitmap of exactly the right size
-
-    Gdiplus::Bitmap bitmap(w, h, PixelFormat32bppARGB); //bitmap for saved image
-    Gdiplus::Graphics graphics(&bitmap); //for drawing on the new bitmap
-    graphics.DrawImage(m_pBitmap, 0, 0, m_rectDirty.left, m_rectDirty.top,
-      w, h, Gdiplus::UnitPixel); //draw the dirty rectangle
-    
-    //now for the actual save, at long last
-
-    succeeded = SUCCEEDED(bitmap.Save(wstrFileName.c_str(), &pngClsid, nullptr));
+    CLSID clsid; //class id
+    GetEncoderClsid((WCHAR*)L"image/png", &clsid); //class id for PNG
+    succeeded = SUCCEEDED(m_pBitmap->Save(wstrFileName.c_str(), &clsid, nullptr));
   } //if
 
   return succeeded;

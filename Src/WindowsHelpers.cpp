@@ -52,7 +52,7 @@ void InitWindow(HINSTANCE hInst, INT nShow, WNDPROC WndProc){
   wndClass.hInstance      = hInst;
   wndClass.hIcon          = LoadIcon(hInst, MAKEINTRESOURCE(IDI_ICON1));
   wndClass.hCursor        = LoadCursor(nullptr, IDC_ARROW);
-  wndClass.hbrBackground  = nullptr;
+  wndClass.hbrBackground  = (HBRUSH)GetStockObject(COLOR_WINDOW+1);
   wndClass.lpszMenuName   = nullptr;
   wndClass.lpszClassName  = appname;
   wndClass.hIconSm        = LoadIcon(hInst, MAKEINTRESOURCE(IDI_ICON2));

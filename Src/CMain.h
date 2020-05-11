@@ -47,8 +47,6 @@ class CMain{
     ULONG_PTR m_gdiplusToken = 0; ///< GDI+ token.
 
     Gdiplus::Bitmap* m_pBitmap = nullptr; ///< Pointer to a bitmap.
-    RECT m_rectDirty = {0, 0, 0, 0}; ///< Dirty rectangle in bitmap.
-    Gdiplus::Graphics* m_pGraphics; ///< Pointer to a graphics object.
 
     LSystem m_cLSystem; ///< The L-system.
 

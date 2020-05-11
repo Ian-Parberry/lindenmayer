@@ -38,9 +38,9 @@
 
 class TurtleDesc{
   public:
-    Gdiplus::PointF m_ptStart; ///< Start point.
+    //Gdiplus::PointF m_ptStart; ///< Start point.
 
-    float m_fAngleDelta = 0; ///< Line angle delta.
+    float m_fAngleDelta = 0; ///< Line angle delta in radians.
     float m_fLength = 8; ///< Line length.
     float m_fLenMultiplier = 1; ///< Line length multiplier.
     float m_fPointSize = 1; ///< Line point size.
@@ -51,12 +51,11 @@ class TurtleDesc{
 
     /// \brief Constructor.
     ///
-    /// \param start Start position.
-    /// \param angledelta Angle delta.
+    /// \param angledelta Angle delta in degrees.
     /// \param len Line length.
 
-    TurtleDesc(Gdiplus::PointF start, float angledelta, float len):
-      m_ptStart(start), m_fAngleDelta(angledelta), m_fLength(len){
+    TurtleDesc(float angledelta, float len):
+      m_fAngleDelta(float(M_PI)*angledelta/180), m_fLength(len){
     }; //constructor
 }; //TurtleDesc
 
