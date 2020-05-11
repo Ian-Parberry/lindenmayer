@@ -34,20 +34,18 @@
 
 /// \brief Turtle graphics descriptor.
 ///
-/// A descriptor for turtle graphics that describes the start state of the turtle.
+/// A descriptor for turtle graphics that describes the start state of the
+/// turtle. Note that the angle delta is stored in radians (required by gdi+),
+/// but the constructor uses degrees (which is what is supplied by ABOP).
 
 class TurtleDesc{
   public:
-    //Gdiplus::PointF m_ptStart; ///< Start point.
-
     float m_fAngleDelta = 0; ///< Line angle delta in radians.
     float m_fLength = 8; ///< Line length.
     float m_fLenMultiplier = 1; ///< Line length multiplier.
     float m_fPointSize = 1; ///< Line point size.
     
-    /// \brief Default constructor.
-
-    TurtleDesc(){}; 
+    TurtleDesc(){}; ///< Default constructor.
 
     /// \brief Constructor.
     ///
