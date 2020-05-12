@@ -53,7 +53,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
       return 0;
       
     case WM_SIZING: //user is resizing the window
-	    ForceMinWinSize(hWnd, wParam, (RECT*)lParam, 320); //enforce minimum size
+	    MinDragRect(hWnd, wParam, (RECT*)lParam, 320); //enforce minimum size
 	    return 0;
 
     case WM_PAINT: //window needs to be redrawn
@@ -76,8 +76,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
           } //if
           break;         
 
-        case IDM_FILE_SAVE: //save bitmap to image file
-          g_pMain->SaveImage();
+        case IDM_FILE_SAVE: //save bitmap to image file       
+          SaveBitmap(hWnd, g_pMain->GetBitmap());
           break;
 
         case IDM_VIEW_THICKLINES: //draw with thick lines
@@ -99,24 +99,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
   } //switch
 } //WndProc
 
-/// \brief The main entry point for this application.  
+/// \brief Winmain.  
 ///
-/// Initialize a window and start the message pump.
-/// This is the main entry point for this application. 
-/// \param hInstance Handle to the current instance of this application.
-/// \param hPrevInstance Unused.
-/// \param lpCmdLine Unused.
-/// \param nCmdShow Nonzero if window is to be shown.
+/// Initialize a window and start the message pump. 
+/// \param hInst Handle to the current instance.
+/// \param hPrev Unused.
+/// \param lpStr Unused.
+/// \param nShow Nonzero if window is to be shown.
 /// \return 0 If this application terminates correctly, otherwise an error code.
 
-int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
-  _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
-{
-  UNREFERENCED_PARAMETER(hPrevInstance); //nope
-  UNREFERENCED_PARAMETER(lpCmdLine); //nope
-  UNREFERENCED_PARAMETER(nCmdShow); //nope
+int WINAPI wWinMain(HINSTANCE hInst, HINSTANCE hPrev, LPWSTR lpStr, int nShow){
+  UNREFERENCED_PARAMETER(hPrev); //nope
+  UNREFERENCED_PARAMETER(lpStr); //nope nope
 
-  InitWindow(hInstance, nCmdShow, WndProc); //create and show a window
+  InitWindow(hInst, nShow, WndProc); //create and show a window
 
   MSG msg; //current message
 
@@ -125,5 +121,5 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     DispatchMessage(&msg);
   } //while
 
-  return (int)msg.wParam; //are we good?
+  return (int)msg.wParam;
 } //wWinMain

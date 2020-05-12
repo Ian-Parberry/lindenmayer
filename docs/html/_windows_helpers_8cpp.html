@@ -93,14 +93,8 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ad68cbf778113a9ec082a5090cb2703c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_windows_helpers_8cpp.html#ad68cbf778113a9ec082a5090cb2703c0">InitWindow</a> (HINSTANCE hInst, INT nShow, WNDPROC <a class="el" href="_main_8cpp.html#a30a1e3b0304f1b083637664cbda94e72">WndProc</a>)</td></tr>
-<tr class="memdesc:ad68cbf778113a9ec082a5090cb2703c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init window.  <a href="#ad68cbf778113a9ec082a5090cb2703c0">More...</a><br /></td></tr>
+<tr class="memdesc:ad68cbf778113a9ec082a5090cb2703c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize window.  <a href="#ad68cbf778113a9ec082a5090cb2703c0">More...</a><br /></td></tr>
 <tr class="separator:ad68cbf778113a9ec082a5090cb2703c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e6a45b94a79657f863c5c966d780f70"><td class="memItemLeft" align="right" valign="top">std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_windows_helpers_8cpp.html#a4e6a45b94a79657f863c5c966d780f70">GetSaveFileName</a> (HWND hwnd)</td></tr>
-<tr class="memdesc:a4e6a45b94a79657f863c5c966d780f70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get saved image file name.  <a href="#a4e6a45b94a79657f863c5c966d780f70">More...</a><br /></td></tr>
-<tr class="separator:a4e6a45b94a79657f863c5c966d780f70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c7a45b5666085d2fc482b9707760837"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_windows_helpers_8cpp.html#a9c7a45b5666085d2fc482b9707760837">GetEncoderClsid</a> (const WCHAR *format, CLSID *pClsid)</td></tr>
-<tr class="memdesc:a9c7a45b5666085d2fc482b9707760837"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get encoder CLSID.  <a href="#a9c7a45b5666085d2fc482b9707760837">More...</a><br /></td></tr>
-<tr class="separator:a9c7a45b5666085d2fc482b9707760837"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab90ef52869992f4af6696021ce4a1769"><td class="memItemLeft" align="right" valign="top">ULONG_PTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_windows_helpers_8cpp.html#ab90ef52869992f4af6696021ce4a1769">InitGDIPlus</a> ()</td></tr>
 <tr class="memdesc:ab90ef52869992f4af6696021ce4a1769"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize GDI+.  <a href="#ab90ef52869992f4af6696021ce4a1769">More...</a><br /></td></tr>
 <tr class="separator:ab90ef52869992f4af6696021ce4a1769"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -108,11 +102,16 @@ Functions</h2></td></tr>
 <tr class="memdesc:a4b916ee29373a9ab75f3ca5c039d8fbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add point to rectangle.  <a href="#a4b916ee29373a9ab75f3ca5c039d8fbf">More...</a><br /></td></tr>
 <tr class="separator:a4b916ee29373a9ab75f3ca5c039d8fbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c82fd93a773c3090fd2084f9655596c"><td class="memItemLeft" align="right" valign="top">Gdiplus::RectF&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_windows_helpers_8cpp.html#a0c82fd93a773c3090fd2084f9655596c">GetClientRectF</a> (HWND hwnd)</td></tr>
-<tr class="memdesc:a0c82fd93a773c3090fd2084f9655596c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get client rectangle.  <a href="#a0c82fd93a773c3090fd2084f9655596c">More...</a><br /></td></tr>
+<tr class="memdesc:a0c82fd93a773c3090fd2084f9655596c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get client rectangle as a RectF.  <a href="#a0c82fd93a773c3090fd2084f9655596c">More...</a><br /></td></tr>
 <tr class="separator:a0c82fd93a773c3090fd2084f9655596c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0758196f560d0f8cc6a65830e1b1f0ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_windows_helpers_8cpp.html#a0758196f560d0f8cc6a65830e1b1f0ad">ForceMinWinSize</a> (HWND hwnd, WPARAM wParam, RECT *pRect, int n)</td></tr>
-<tr class="memdesc:a0758196f560d0f8cc6a65830e1b1f0ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enforce minimum window size.  <a href="#a0758196f560d0f8cc6a65830e1b1f0ad">More...</a><br /></td></tr>
-<tr class="separator:a0758196f560d0f8cc6a65830e1b1f0ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e1b4b4e50563750e204977f3b63d68c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_windows_helpers_8cpp.html#a2e1b4b4e50563750e204977f3b63d68c">MinDragRect</a> (HWND hwnd, WPARAM wParam, RECT *pRect, int n)</td></tr>
+<tr class="memdesc:a2e1b4b4e50563750e204977f3b63d68c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enforce minimum drag rectangle.  <a href="#a2e1b4b4e50563750e204977f3b63d68c">More...</a><br /></td></tr>
+<tr class="separator:a2e1b4b4e50563750e204977f3b63d68c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab446d7eb02f2055da6303a03f9f697ef"><td class="memItemLeft" align="right" valign="top">HRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_windows_helpers_8cpp.html#ab446d7eb02f2055da6303a03f9f697ef">GetEncoderClsid</a> (const WCHAR *format, CLSID *pClsid)</td></tr>
+<tr class="separator:ab446d7eb02f2055da6303a03f9f697ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcbcd456d1d87a2063d358460e5ec0aa"><td class="memItemLeft" align="right" valign="top">HRESULT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_windows_helpers_8cpp.html#abcbcd456d1d87a2063d358460e5ec0aa">SaveBitmap</a> (HWND hwnd, Gdiplus::Bitmap *pBitmap)</td></tr>
+<tr class="memdesc:abcbcd456d1d87a2063d358460e5ec0aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save bitmap to file.  <a href="#abcbcd456d1d87a2063d358460e5ec0aa">More...</a><br /></td></tr>
+<tr class="separator:abcbcd456d1d87a2063d358460e5ec0aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>These platform-dependent functions are hidden away so that the faint-of-heart don't have to see them if they're offended by them. </p>
@@ -146,64 +145,13 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Add a point to a rectangle, that is, extend the rectangle to enclose the point. Note that the rectangle has integer coefficients whereas the point has floating-point coefficients, and therefore we must apply <code>floor</code> and <code>ceil</code> judiciously. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">r</td><td>Reference to a <code>RECT</code> structure. </td></tr>
+    <tr><td class="paramname">r</td><td>[IN, OUT] Reference to a <code>RECT</code> structure. </td></tr>
     <tr><td class="paramname">point</td><td>A point. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_windows_helpers_8cpp_source.html#l00176">176</a> of file <a class="el" href="_windows_helpers_8cpp_source.html">WindowsHelpers.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a0758196f560d0f8cc6a65830e1b1f0ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0758196f560d0f8cc6a65830e1b1f0ad">&#9670;&nbsp;</a></span>ForceMinWinSize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ForceMinWinSize </td>
-          <td>(</td>
-          <td class="paramtype">HWND&#160;</td>
-          <td class="paramname"><em>hwnd</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">WPARAM&#160;</td>
-          <td class="paramname"><em>wParam</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">RECT *&#160;</td>
-          <td class="paramname"><em>pRect</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>n</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Enforce a minimum width and height for the client area of the window in response to a WM_SIZING message. This function resizes the drag rectangle provided by the WM_SIZING message. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">hwnd</td><td>Window handle. </td></tr>
-    <tr><td class="paramname">wParam</td><td>WMSZ message telling us which edge is being dragged on. </td></tr>
-    <tr><td class="paramname">pRect</td><td>[IN, OUT] Pointer to drag rectangle. </td></tr>
-    <tr><td class="paramname">n</td><td>Minimum width and height of client area. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_windows_helpers_8cpp_source.html#l00203">203</a> of file <a class="el" href="_windows_helpers_8cpp_source.html">WindowsHelpers.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_windows_helpers_8cpp_source.html#l00110">110</a> of file <a class="el" href="_windows_helpers_8cpp_source.html">WindowsHelpers.cpp</a>.</p>
 
 </div>
 </div>
@@ -230,18 +178,18 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Client rectangle of that window. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_windows_helpers_8cpp_source.html#l00187">187</a> of file <a class="el" href="_windows_helpers_8cpp_source.html">WindowsHelpers.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_windows_helpers_8cpp_source.html#l00122">122</a> of file <a class="el" href="_windows_helpers_8cpp_source.html">WindowsHelpers.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a9c7a45b5666085d2fc482b9707760837"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c7a45b5666085d2fc482b9707760837">&#9670;&nbsp;</a></span>GetEncoderClsid()</h2>
+<a id="ab446d7eb02f2055da6303a03f9f697ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab446d7eb02f2055da6303a03f9f697ef">&#9670;&nbsp;</a></span>GetEncoderClsid()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int GetEncoderClsid </td>
+          <td class="memname">HRESULT GetEncoderClsid </td>
           <td>(</td>
           <td class="paramtype">const WCHAR *&#160;</td>
           <td class="paramname"><em>format</em>, </td>
@@ -266,36 +214,9 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Index of codec for image format, -1 for failure. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>S_OK for success, E_FAIL for failure. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_windows_helpers_8cpp_source.html#l00131">131</a> of file <a class="el" href="_windows_helpers_8cpp_source.html">WindowsHelpers.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a4e6a45b94a79657f863c5c966d780f70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e6a45b94a79657f863c5c966d780f70">&#9670;&nbsp;</a></span>GetSaveFileName()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::wstring GetSaveFileName </td>
-          <td>(</td>
-          <td class="paramtype">HWND&#160;</td>
-          <td class="paramname"><em>hwnd</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Display a <code>Save</code> dialog box for png files and return the file name that the user selects. If for the usual reasons this fails, then the empty string is returned. Only files with a <code>.png</code> extension are allowed. The default file name is "ImageN.png", where N is the number of images saved so far in the current instance of this program. This prevents any collisions with files already saved by this instance. If there is a collision with a file from a previous instance, then the user is prompted to overwrite or rename it in the normal fashion. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">hwnd</td><td>Window handle. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The selected file name (empty for failure). </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_windows_helpers_8cpp_source.html#l00092">92</a> of file <a class="el" href="_windows_helpers_8cpp_source.html">WindowsHelpers.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_windows_helpers_8cpp_source.html#l00207">207</a> of file <a class="el" href="_windows_helpers_8cpp_source.html">WindowsHelpers.cpp</a>.</p>
 
 </div>
 </div>
@@ -315,7 +236,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Initialize GDI+ and get a GDI+ token. </p><dl class="section return"><dt>Returns</dt><dd>A GDI+ token. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_windows_helpers_8cpp_source.html#l00162">162</a> of file <a class="el" href="_windows_helpers_8cpp_source.html">WindowsHelpers.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_windows_helpers_8cpp_source.html#l00089">89</a> of file <a class="el" href="_windows_helpers_8cpp_source.html">WindowsHelpers.cpp</a>.</p>
 
 </div>
 </div>
@@ -359,14 +280,103 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_windows_helpers_8cpp_source.html#l00042">42</a> of file <a class="el" href="_windows_helpers_8cpp_source.html">WindowsHelpers.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_windows_helpers_8cpp_source.html#l00047">47</a> of file <a class="el" href="_windows_helpers_8cpp_source.html">WindowsHelpers.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2e1b4b4e50563750e204977f3b63d68c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e1b4b4e50563750e204977f3b63d68c">&#9670;&nbsp;</a></span>MinDragRect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MinDragRect </td>
+          <td>(</td>
+          <td class="paramtype">HWND&#160;</td>
+          <td class="paramname"><em>hwnd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">WPARAM&#160;</td>
+          <td class="paramname"><em>wParam</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RECT *&#160;</td>
+          <td class="paramname"><em>pRect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Resize the drag rectangle provided by a WM_SIZING message to ensure a minimum client area width and height. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hwnd</td><td>Window handle. </td></tr>
+    <tr><td class="paramname">wParam</td><td>WMSZ message telling us which edge is being dragged on. </td></tr>
+    <tr><td class="paramname">pRect</td><td>[IN, OUT] Pointer to drag rectangle. </td></tr>
+    <tr><td class="paramname">n</td><td>Minimum width and height of client area. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_windows_helpers_8cpp_source.html#l00137">137</a> of file <a class="el" href="_windows_helpers_8cpp_source.html">WindowsHelpers.cpp</a>.</p>
+
+</div>
+</div>
+<a id="abcbcd456d1d87a2063d358460e5ec0aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcbcd456d1d87a2063d358460e5ec0aa">&#9670;&nbsp;</a></span>SaveBitmap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">HRESULT SaveBitmap </td>
+          <td>(</td>
+          <td class="paramtype">HWND&#160;</td>
+          <td class="paramname"><em>hwnd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Gdiplus::Bitmap *&#160;</td>
+          <td class="paramname"><em>pBitmap</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Display a <code>Save</code> dialog box for png files and save a bitmap to the file name that the user selects. Only files with a <code>.png</code> extension are allowed. The default file name is "ImageN.png", where N is the number of images saved so far in the current instance of this program. This prevents any collisions with files already saved by this instance. If there is a collision with a file from a previous instance, then the user is prompted to overwrite or rename it in the normal fashion. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hwnd</td><td>Window handle. </td></tr>
+    <tr><td class="paramname">pBitmap</td><td>Pointer to a bitmap. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>S_OK for success, E_FAIL for failure. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_windows_helpers_8cpp_source.html#l00241">241</a> of file <a class="el" href="_windows_helpers_8cpp_source.html">WindowsHelpers.cpp</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 11 2020 14:47:42 for Lindenmayer System by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 12 2020 16:12:11 for Lindenmayer System by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

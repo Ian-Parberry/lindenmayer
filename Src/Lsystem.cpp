@@ -38,7 +38,7 @@
 /// \param fProb Production probability (defaults to 1).
 
 LProduction::LProduction(char lhs, const std::wstring rhs, float fProb):
-  m_chLHS(lhs), m_strRHS(rhs), m_fProb(fProb){
+  m_chLHS(lhs), m_wstrRHS(rhs), m_fProb(fProb){
 } //constructor
 
 #pragma endregion LProduction
@@ -50,61 +50,61 @@ LProduction::LProduction(char lhs, const std::wstring rhs, float fProb):
 
 #pragma region Settings functions
 
-/// Add a new production. The new production is inserted into m_mapRules,
+/// Add a new production. The new production is inserted into `m_mapRules`,
 /// that is, the left-hand side is mapped to a vector of right-hand sides
 /// to which the new right-hand side is appended. The new rule is also appended
-/// to the rule string for display.
+/// to the rule string `m_wstrRuleString` for display.
 /// \param rule A production.
 
 void LSystem::AddRule(const LProduction& rule){
-  if(rule.m_fProb < 1)m_bStochastic = true;
+  if(rule.m_fProb < 1)m_bStochastic = true; //stochastic rule detected
 
-  auto p = m_mapRules.find(rule.m_chLHS);
+  auto p = m_mapRules.find(rule.m_chLHS); //find the rules with the same lhs
 
-  if(p == m_mapRules.end()){
-    std::vector<LProduction> v;
-    v.push_back(rule);
-    m_mapRules.insert(std::make_pair(rule.m_chLHS, v));
+  if(p == m_mapRules.end()){ //if no rule with the same lhs in map
+    std::vector<LProduction> v; //for new map entry
+    v.push_back(rule); //add new rule
+    m_mapRules.insert(std::make_pair(rule.m_chLHS, v)); //add a new map entry
   } //if
 
-  else p->second.push_back(rule);
+  else p->second.push_back(rule); //add to vector of rules with the same lhs
 
   //add rule to rule string for display
   
-  m_strRuleString += rule.m_chLHS;
-  m_strRuleString += L" \u2192 " + (std::wstring)rule.m_strRHS;
+  m_wstrRuleString += rule.m_chLHS;
+  m_wstrRuleString += L" \u2192 " + (std::wstring)rule.m_wstrRHS; //\u2192 is an arrow
 
   //a bit of fuss here to get the probability with only 2 digits precision
 
   if(m_bStochastic){
     std::wstringstream wstream; //weird but necessary
-    wstream.precision(2); //2 digits after the decimal point
-    wstream << std::fixed << rule.m_fProb; //apply it
-    m_strRuleString += L" (" + wstream.str() + L")"; //append to rule string
+    wstream.precision(2); //set to 2 digits after the decimal point
+    wstream << std::fixed << rule.m_fProb; //apply stream
+    m_wstrRuleString += L" (" + wstream.str() + L")"; //append to rule string
   } //if
 
-  m_strRuleString += L"\n"; //end rule
+  m_wstrRuleString += L"\n"; //end of new rule in rule string
 } //AddRule
 
-/// Set the root, that is, store it in `m_strRoot` and prepend it to the rule
-/// string for display. 
+/// Set the root, that is, store it in `m_wstrRoot` and prepend it to the rule
+/// string `m_wstrRuleString` for display. 
 /// \param omega The new root.
 
 void LSystem::SetRoot(const std::wstring& omega){
-  m_strRoot = omega; //set the root
-  m_strRuleString = L"Root is " + omega + L"\n" + m_strRuleString; //prepend
+  m_wstrRoot = omega; //set the root
+  m_wstrRuleString = L"Root is " + omega + L"\n" + m_wstrRuleString; //prepend
 } //SetRoot
 
 /// Clear the rules, the rule string, the root string, the generation buffers,
 /// and the settings.
 
 void LSystem::Clear(){
-  m_mapRules.clear();
-  m_strRuleString.clear();
-  m_strRoot.clear();
-  m_strBuffer[0].clear(); 
-  m_strBuffer[1].clear(); 
-  m_bStochastic = false;
+  m_mapRules.clear(); //no rules
+  m_wstrRuleString.clear(); //no rule string
+  m_wstrRoot.clear(); //no root string
+  m_wstrBuffer[0].clear(); //nothing in buffer 0
+  m_wstrBuffer[1].clear(); //nothing in buffer 1
+  m_bStochastic = false; //no stochastic rules
 } //Clear
 
 #pragma endregion Settings functions
@@ -116,20 +116,21 @@ void LSystem::Clear(){
 
 /// Generate a string from the root by applying the L-system productions in
 /// parallel, and repeating for a fixed number of generations. Double-buffering
-/// is used, that is, if generation \f$i\f$ is stored in m_strBuffer[\f$j\f$],
+/// is used, that is, if generation \f$i\f$ is stored in m_wstrBuffer[\f$j\f$],
 /// where \f$j \in \{0,1\}\f$, then generation \f$i+1\f$ is stored in
-/// m_strBuffer[\f$j + 1 \pmod 2\f$]. 
+/// m_wstrBuffer[\f$j + 1 \pmod 2\f$]. Zero generations means the root string,
+/// 1 generation means 1 pass from left to right applying the rules, etc.
 /// \param n The number of generations.
 
-void LSystem::Generate(int n){
+void LSystem::Generate(const UINT n){
   m_nGenerations = n;
 
-  std::wstring* pSrc = &m_strBuffer[0]; //source buffer
-  std::wstring* pDest = &m_strBuffer[1]; //destination buffer
+  std::wstring* pSrc = &m_wstrBuffer[0]; //source buffer
+  std::wstring* pDest = &m_wstrBuffer[1]; //destination buffer
 
-  *pSrc = m_strRoot; //copy root string to source buffer
+  *pSrc = m_wstrRoot; //copy root string to source buffer
  
-  for(int i=0; i<n; i++){ //for each generation 
+  for(UINT i=0; i<n; i++){ //for each generation 
     pDest->clear();
 
     for(size_t i=0; i<pSrc->size(); i++){ //for each char in source
@@ -145,7 +146,7 @@ void LSystem::Generate(int n){
           fProb += rule.m_fProb; //accumulate probability
 
           if(fRand <= fProb){ //use the current rule
-            *pDest += rule.m_strRHS; //apply rule
+            *pDest += rule.m_wstrRHS; //apply rule
             bRuleApplied = true; //record that a rule was applied
             break; //no need to try more rules
           } //if
@@ -169,28 +170,28 @@ void LSystem::Generate(int n){
 
 #pragma region Reader functions
 
-/// Reader function for the result string.
-/// \return A const reference to the result string.
+/// Reader function for the result string `*m_pResult`.
+/// \return A const reference to the result string `*m_pResult`.
 
 const std::wstring& LSystem::GetString() const{
   return *m_pResult;
 } //GetString
 
-/// Reader function for the rule string.
-/// \return A const reference to the rule string.
+/// Reader function for the rule string `m_wstrRuleString`.
+/// \return A const reference to the rule string `m_wstrRuleString`.
 
 const std::wstring& LSystem::GetRuleString() const{
-  return m_strRuleString;
+  return m_wstrRuleString;
 } //GetRuleString
 
-/// Reader function for the current number of generations.
-/// \return The current number of generations.
+/// Reader function for the current number of generations `m_nGenerations`.
+/// \return The current number of generations `m_nGenerations`.
 
 const UINT LSystem::GetGenerations() const{
   return m_nGenerations;
 } //GetGenerations
 
-/// Reader function for the stochasticity flag.
+/// Reader function for the stochasticity flag `m_bStochastic`.
 /// \return true if the current rules are stochastic.
 
 const bool LSystem::IsStochastic() const{

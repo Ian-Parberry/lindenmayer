@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['saveimage',['SaveImage',['../class_c_main.html#af088cf33d39f68d4fff00537c8eee234',1,'CMain']]],
+  ['savebitmap',['SaveBitmap',['../_windows_helpers_8cpp.html#abcbcd456d1d87a2063d358460e5ec0aa',1,'SaveBitmap(HWND hwnd, Gdiplus::Bitmap *pBitmap):&#160;WindowsHelpers.cpp'],['../_windows_helpers_8h.html#a1cb7feb5f1f8c6485b074189db2719b8',1,'SaveBitmap(HWND, Gdiplus::Bitmap *):&#160;WindowsHelpers.cpp']]],
   ['setlsystemmenuchecks',['SetLSystemMenuChecks',['../class_c_main.html#a9049f6f00180fcd9e4aa327c0a44a500',1,'CMain']]],
   ['setroot',['SetRoot',['../class_l_system.html#a41f70c92739aabfda52e2af3a271011b',1,'LSystem']]],
   ['setrules',['SetRules',['../class_c_main.html#ac53889e465a7c6ec0949f48c87055126',1,'CMain']]],

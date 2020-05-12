@@ -43,7 +43,7 @@
 class LProduction{
   public:
     char m_chLHS = '\0'; ///< Left-hand side of production.
-    std::wstring m_strRHS; ///< Right-hand side of production.
+    std::wstring m_wstrRHS; ///< Right-hand side of production.
     float m_fProb; ///< Probability of production applying.
 
     LProduction(char lhs, const std::wstring rhs, float fProb=1); ///< Constructor.
@@ -62,22 +62,22 @@ class LProduction{
 /// re-create some of the line drawings in ABOP. The productions are stored
 /// in a `std::map<char, std::vector<LProduction>>` which maps the
 /// left-hand side of a production to an `std::vector` of the productions that 
-/// have that left-hand side. A text string m_strRuleString is used to store
+/// have that left-hand side. A text string m_wstrRuleString is used to store
 /// a printable rule string in text form which is used to display the rules
-/// on the window. Double-buffering in `m_strBuffer[2]` is used to generate the
+/// on the window. Double-buffering in `m_wstrBuffer[2]` is used to generate the
 /// result string `m_pResult`.
 
 class LSystem{
   private: 
     CRandom m_cRandom; ///< PRNG.
 
-    std::wstring m_strRoot; ///< Root string.
+    std::wstring m_wstrRoot; ///< Root string.
 
     std::map<wchar_t, std::vector<LProduction>> m_mapRules; ///< Productions.
-    std::wstring m_strRuleString; ///< Rule string.
+    std::wstring m_wstrRuleString; ///< Rule string.
 
-    std::wstring m_strBuffer[2]; ///< Generation buffers.
-    std::wstring* m_pResult = m_strBuffer; ///< Pointer to generated string.
+    std::wstring m_wstrBuffer[2]; ///< Generation buffers.
+    std::wstring* m_pResult = m_wstrBuffer; ///< Pointer to generated string.
 
     bool m_bStochastic = false; ///< Includes a stochastic rule.
     UINT m_nGenerations = 0; ///< Number of generations.
@@ -87,7 +87,7 @@ class LSystem{
     void AddRule(const LProduction& rule); ///< AddRule rule.
 
     void Clear(); ///< Clear the rules, buffers, and settings.
-    void Generate(int n); ///< Generate L-system from stored root and rules.
+    void Generate(const UINT n); ///< Generate L-system from stored root and rules.
 
     const std::wstring& GetString() const; ///< Get generated string.
     const std::wstring& GetRuleString() const; ///< Get rule string.

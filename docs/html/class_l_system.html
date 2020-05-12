@@ -94,9 +94,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aef5e0776bc9cb0f913463182dbe45328"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_system.html#aef5e0776bc9cb0f913463182dbe45328">Clear</a> ()</td></tr>
 <tr class="memdesc:aef5e0776bc9cb0f913463182dbe45328"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the rules, buffers, and settings.  <a href="#aef5e0776bc9cb0f913463182dbe45328">More...</a><br /></td></tr>
 <tr class="separator:aef5e0776bc9cb0f913463182dbe45328"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad55a2a5655b82ec43204bef6fc5e69cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_system.html#ad55a2a5655b82ec43204bef6fc5e69cc">Generate</a> (int n)</td></tr>
-<tr class="memdesc:ad55a2a5655b82ec43204bef6fc5e69cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate L-system from stored root and rules.  <a href="#ad55a2a5655b82ec43204bef6fc5e69cc">More...</a><br /></td></tr>
-<tr class="separator:ad55a2a5655b82ec43204bef6fc5e69cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72a1b7e63b7d60e2f2f6b958c73dfcb8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_system.html#a72a1b7e63b7d60e2f2f6b958c73dfcb8">Generate</a> (const UINT n)</td></tr>
+<tr class="memdesc:a72a1b7e63b7d60e2f2f6b958c73dfcb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate L-system from stored root and rules.  <a href="#a72a1b7e63b7d60e2f2f6b958c73dfcb8">More...</a><br /></td></tr>
+<tr class="separator:a72a1b7e63b7d60e2f2f6b958c73dfcb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa644583f89a33ded4a8134124705a532"><td class="memItemLeft" align="right" valign="top">const std::wstring &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_system.html#aa644583f89a33ded4a8134124705a532">GetString</a> () const</td></tr>
 <tr class="memdesc:aa644583f89a33ded4a8134124705a532"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get generated string.  <a href="#aa644583f89a33ded4a8134124705a532">More...</a><br /></td></tr>
 <tr class="separator:aa644583f89a33ded4a8134124705a532"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,24 +116,24 @@ Private Attributes</h2></td></tr>
 <a class="el" href="class_c_random.html">CRandom</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_system.html#ac0ed54b6b9bc4274b3ba7ffe08cebbb8">m_cRandom</a></td></tr>
 <tr class="memdesc:ac0ed54b6b9bc4274b3ba7ffe08cebbb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">PRNG. <br /></td></tr>
 <tr class="separator:ac0ed54b6b9bc4274b3ba7ffe08cebbb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e1e4d209c4c6ddbe88c0fba509fe24f"><td class="memItemLeft" align="right" valign="top"><a id="a9e1e4d209c4c6ddbe88c0fba509fe24f"></a>
-std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_system.html#a9e1e4d209c4c6ddbe88c0fba509fe24f">m_strRoot</a></td></tr>
-<tr class="memdesc:a9e1e4d209c4c6ddbe88c0fba509fe24f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Root string. <br /></td></tr>
-<tr class="separator:a9e1e4d209c4c6ddbe88c0fba509fe24f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a864dc2ee012f03b25ce5b47f61b5d1c3"><td class="memItemLeft" align="right" valign="top"><a id="a864dc2ee012f03b25ce5b47f61b5d1c3"></a>
+std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_system.html#a864dc2ee012f03b25ce5b47f61b5d1c3">m_wstrRoot</a></td></tr>
+<tr class="memdesc:a864dc2ee012f03b25ce5b47f61b5d1c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Root string. <br /></td></tr>
+<tr class="separator:a864dc2ee012f03b25ce5b47f61b5d1c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a989e34d28962650f9553abb7b111f4d8"><td class="memItemLeft" align="right" valign="top"><a id="a989e34d28962650f9553abb7b111f4d8"></a>
 std::map&lt; wchar_t, std::vector&lt; <a class="el" href="class_l_production.html">LProduction</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_system.html#a989e34d28962650f9553abb7b111f4d8">m_mapRules</a></td></tr>
 <tr class="memdesc:a989e34d28962650f9553abb7b111f4d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Productions. <br /></td></tr>
 <tr class="separator:a989e34d28962650f9553abb7b111f4d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35088b1fb8569aabca80f36abcfedc87"><td class="memItemLeft" align="right" valign="top"><a id="a35088b1fb8569aabca80f36abcfedc87"></a>
-std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_system.html#a35088b1fb8569aabca80f36abcfedc87">m_strRuleString</a></td></tr>
-<tr class="memdesc:a35088b1fb8569aabca80f36abcfedc87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rule string. <br /></td></tr>
-<tr class="separator:a35088b1fb8569aabca80f36abcfedc87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab04aa632e68b3d619b69a21e65895372"><td class="memItemLeft" align="right" valign="top"><a id="ab04aa632e68b3d619b69a21e65895372"></a>
-std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_system.html#ab04aa632e68b3d619b69a21e65895372">m_strBuffer</a> [2]</td></tr>
-<tr class="memdesc:ab04aa632e68b3d619b69a21e65895372"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generation buffers. <br /></td></tr>
-<tr class="separator:ab04aa632e68b3d619b69a21e65895372"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9aed1ea4398a7596f6e3df2d470aa11"><td class="memItemLeft" align="right" valign="top"><a id="ac9aed1ea4398a7596f6e3df2d470aa11"></a>
+std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_system.html#ac9aed1ea4398a7596f6e3df2d470aa11">m_wstrRuleString</a></td></tr>
+<tr class="memdesc:ac9aed1ea4398a7596f6e3df2d470aa11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rule string. <br /></td></tr>
+<tr class="separator:ac9aed1ea4398a7596f6e3df2d470aa11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05a87cb4bea9da3fa8491c127a8aa722"><td class="memItemLeft" align="right" valign="top"><a id="a05a87cb4bea9da3fa8491c127a8aa722"></a>
+std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_system.html#a05a87cb4bea9da3fa8491c127a8aa722">m_wstrBuffer</a> [2]</td></tr>
+<tr class="memdesc:a05a87cb4bea9da3fa8491c127a8aa722"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generation buffers. <br /></td></tr>
+<tr class="separator:a05a87cb4bea9da3fa8491c127a8aa722"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ac3b539bb3468733d21d315980d9edf"><td class="memItemLeft" align="right" valign="top"><a id="a3ac3b539bb3468733d21d315980d9edf"></a>
-std::wstring *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_system.html#a3ac3b539bb3468733d21d315980d9edf">m_pResult</a> = <a class="el" href="class_l_system.html#ab04aa632e68b3d619b69a21e65895372">m_strBuffer</a></td></tr>
+std::wstring *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_l_system.html#a3ac3b539bb3468733d21d315980d9edf">m_pResult</a> = <a class="el" href="class_l_system.html#a05a87cb4bea9da3fa8491c127a8aa722">m_wstrBuffer</a></td></tr>
 <tr class="memdesc:a3ac3b539bb3468733d21d315980d9edf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to generated string. <br /></td></tr>
 <tr class="separator:a3ac3b539bb3468733d21d315980d9edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a642ac0ff4347596aa22bae5c1f88db52"><td class="memItemLeft" align="right" valign="top"><a id="a642ac0ff4347596aa22bae5c1f88db52"></a>
@@ -146,7 +146,7 @@ UINT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:acbf106ba3d05f43d0687ac833c5c528b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This basic context-free stochastic bracketed L-system can be used to re-create some of the line drawings in ABOP. The productions are stored in a <code>std::map&lt;char, std::vector&lt;<a class="el" href="class_l_production.html" title="Stochastic context-free production. ">LProduction</a>&gt;&gt;</code> which maps the left-hand side of a production to an <code>std::vector</code> of the productions that have that left-hand side. A text string m_strRuleString is used to store a printable rule string in text form which is used to display the rules on the window. Double-buffering in <code>m_strBuffer[2]</code> is used to generate the result string <code>m_pResult</code>. </p>
+<div class="textblock"><p>This basic context-free stochastic bracketed L-system can be used to re-create some of the line drawings in ABOP. The productions are stored in a <code>std::map&lt;char, std::vector&lt;<a class="el" href="class_l_production.html" title="Stochastic context-free production. ">LProduction</a>&gt;&gt;</code> which maps the left-hand side of a production to an <code>std::vector</code> of the productions that have that left-hand side. A text string m_wstrRuleString is used to store a printable rule string in text form which is used to display the rules on the window. Double-buffering in <code>m_wstrBuffer[2]</code> is used to generate the result string <code>m_pResult</code>. </p>
 
 <p class="definition">Definition at line <a class="el" href="_lsystem_8h_source.html#l00070">70</a> of file <a class="el" href="_lsystem_8h_source.html">Lsystem.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -165,7 +165,7 @@ UINT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Add a new production. The new production is inserted into m_mapRules, that is, the left-hand side is mapped to a vector of right-hand sides to which the new right-hand side is appended. The new rule is also appended to the rule string for display. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Add a new production. The new production is inserted into <code>m_mapRules</code>, that is, the left-hand side is mapped to a vector of right-hand sides to which the new right-hand side is appended. The new rule is also appended to the rule string <code>m_wstrRuleString</code> for display. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">rule</td><td>A production. </td></tr>
   </table>
@@ -196,8 +196,8 @@ UINT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="ad55a2a5655b82ec43204bef6fc5e69cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad55a2a5655b82ec43204bef6fc5e69cc">&#9670;&nbsp;</a></span>Generate()</h2>
+<a id="a72a1b7e63b7d60e2f2f6b958c73dfcb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72a1b7e63b7d60e2f2f6b958c73dfcb8">&#9670;&nbsp;</a></span>Generate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -205,20 +205,20 @@ UINT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="memname">void LSystem::Generate </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">const UINT&#160;</td>
           <td class="paramname"><em>n</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Generate a string from the root by applying the L-system productions in parallel, and repeating for a fixed number of generations. Double-buffering is used, that is, if generation \(i\) is stored in m_strBuffer[ \(j\)], where \(j \in \{0,1\}\), then generation \(i+1\) is stored in m_strBuffer[ \(j + 1 \pmod 2\)]. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Generate a string from the root by applying the L-system productions in parallel, and repeating for a fixed number of generations. Double-buffering is used, that is, if generation \(i\) is stored in m_wstrBuffer[ \(j\)], where \(j \in \{0,1\}\), then generation \(i+1\) is stored in m_wstrBuffer[ \(j + 1 \pmod 2\)]. Zero generations means the root string, 1 generation means 1 pass from left to right applying the rules, etc. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">n</td><td>The number of generations. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_lsystem_8cpp_source.html#l00124">124</a> of file <a class="el" href="_lsystem_8cpp_source.html">Lsystem.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_lsystem_8cpp_source.html#l00125">125</a> of file <a class="el" href="_lsystem_8cpp_source.html">Lsystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -236,9 +236,9 @@ UINT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Reader function for the current number of generations. </p><dl class="section return"><dt>Returns</dt><dd>The current number of generations. </dd></dl>
+<p>Reader function for the current number of generations <code>m_nGenerations</code>. </p><dl class="section return"><dt>Returns</dt><dd>The current number of generations <code>m_nGenerations</code>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_lsystem_8cpp_source.html#l00189">189</a> of file <a class="el" href="_lsystem_8cpp_source.html">Lsystem.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_lsystem_8cpp_source.html#l00190">190</a> of file <a class="el" href="_lsystem_8cpp_source.html">Lsystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -256,9 +256,9 @@ UINT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Reader function for the rule string. </p><dl class="section return"><dt>Returns</dt><dd>A const reference to the rule string. </dd></dl>
+<p>Reader function for the rule string <code>m_wstrRuleString</code>. </p><dl class="section return"><dt>Returns</dt><dd>A const reference to the rule string <code>m_wstrRuleString</code>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_lsystem_8cpp_source.html#l00182">182</a> of file <a class="el" href="_lsystem_8cpp_source.html">Lsystem.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_lsystem_8cpp_source.html#l00183">183</a> of file <a class="el" href="_lsystem_8cpp_source.html">Lsystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -276,9 +276,9 @@ UINT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Reader function for the result string. </p><dl class="section return"><dt>Returns</dt><dd>A const reference to the result string. </dd></dl>
+<p>Reader function for the result string <code>*m_pResult</code>. </p><dl class="section return"><dt>Returns</dt><dd>A const reference to the result string <code>*m_pResult</code>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_lsystem_8cpp_source.html#l00175">175</a> of file <a class="el" href="_lsystem_8cpp_source.html">Lsystem.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_lsystem_8cpp_source.html#l00176">176</a> of file <a class="el" href="_lsystem_8cpp_source.html">Lsystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -296,9 +296,9 @@ UINT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Reader function for the stochasticity flag. </p><dl class="section return"><dt>Returns</dt><dd>true if the current rules are stochastic. </dd></dl>
+<p>Reader function for the stochasticity flag <code>m_bStochastic</code>. </p><dl class="section return"><dt>Returns</dt><dd>true if the current rules are stochastic. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_lsystem_8cpp_source.html#l00196">196</a> of file <a class="el" href="_lsystem_8cpp_source.html">Lsystem.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_lsystem_8cpp_source.html#l00197">197</a> of file <a class="el" href="_lsystem_8cpp_source.html">Lsystem.cpp</a>.</p>
 
 </div>
 </div>
@@ -317,7 +317,7 @@ UINT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Set the root, that is, store it in <code>m_strRoot</code> and prepend it to the rule string for display. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Set the root, that is, store it in <code>m_wstrRoot</code> and prepend it to the rule string <code>m_wstrRuleString</code> for display. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">omega</td><td>The new root. </td></tr>
   </table>
@@ -331,7 +331,7 @@ UINT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 11 2020 14:47:42 for Lindenmayer System by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 12 2020 16:12:11 for Lindenmayer System by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

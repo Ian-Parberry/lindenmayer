@@ -46,7 +46,7 @@ class CMain{
     
     ULONG_PTR m_gdiplusToken = 0; ///< GDI+ token.
 
-    Gdiplus::Bitmap* m_pBitmap = nullptr; ///< Pointer to a bitmap.
+    Gdiplus::Bitmap* m_pBitmap = nullptr; ///< Pointer to a bitmap image.
 
     LSystem m_cLSystem; ///< The L-system.
 
@@ -57,7 +57,7 @@ class CMain{
     Gdiplus::FontFamily* m_pFontFamily = nullptr; ///< Font family.
     Gdiplus::Font* m_pFont = nullptr; ///< Font.
 
-    void SetRules(); ///< Create L-system rules.
+    void SetRules(); ///< Create the L-system rules.
     
     void Draw(const TurtleDesc& d); ///< Draw turtle graphics.
     void DrawRules(Gdiplus::Graphics& graphics, Gdiplus::PointF p); ///< Draw rules.
@@ -77,7 +77,7 @@ class CMain{
 
     void OnPaint(); ///< Paint the client area.
     void SetType(UINT t); ///< Set type.
-    bool SaveImage(); ///< Save image to a file.
+    Gdiplus::Bitmap* GetBitmap(); ///< Get pointer to bitmap.
 
     const bool IsStochastic() const; ///< Is a stochastic L-system.
     void ToggleShowRules(); ///< Toggle the show rules flag.

@@ -51,8 +51,8 @@
 #define IDM_LSYS_PLANT_F   10 ///< Menu id for Fig. 1.24f.
 #define IDM_LSYS_HEXGOSPER 11 ///< Menu id for hexagonal Gosper curve.
 
-#define IDM_VIEW_RULES 12 ///< Menu id for showing current rules.
-#define IDM_VIEW_THICKLINES 14 ///< Menu id for thick lines.
+#define IDM_VIEW_RULES 12 ///< Menu id for showing rules.
+#define IDM_VIEW_THICKLINES 13 ///< Menu id for thick lines.
 
 #pragma endregion Menu IDs
 
@@ -61,14 +61,19 @@
 
 #pragma region Helper functions
 
-void InitWindow(HINSTANCE hInst, INT nShow, WNDPROC WndProc); ///< Init window.
+//initialization functions
+
+void InitWindow(HINSTANCE, INT, WNDPROC); ///< Initialize window.
 ULONG_PTR InitGDIPlus(); ///< Initialize GDI+.
 
-int GetEncoderClsid(const WCHAR* format, CLSID* pClsid); ///< Get encoder CLSID.
-std::wstring GetSaveFileName(HWND hwnd); ///< Get saved image file name.
-void AddPointToRect(RECT& r, Gdiplus::PointF point); ///< Add point to rectangle.
-Gdiplus::RectF GetClientRectF(HWND hwnd); ///< Get client rectangle.
-void ForceMinWinSize(HWND hwnd, WPARAM wParam,
-  RECT* pRect, int n); ///< Enforce minimum window size.
+//rectangle functions
+
+void AddPointToRect(RECT&, Gdiplus::PointF); ///< Add point to rectangle.
+Gdiplus::RectF GetClientRectF(HWND); ///< Get client rectangle as a RectF.
+void MinDragRect(HWND, WPARAM, RECT*, int); ///< Enforce minimum drag rectangle.
+
+//others
+
+HRESULT SaveBitmap(HWND, Gdiplus::Bitmap*); ///< Save bitmap to file.
 
 #pragma endregion Helper functions

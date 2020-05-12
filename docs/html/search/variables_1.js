@@ -25,9 +25,9 @@ var searchData=
   ['m_5fpfontfamily',['m_pFontFamily',['../class_c_main.html#a7f815332c2ac236a2bbcdc45b88c4dc2',1,'CMain']]],
   ['m_5fpresult',['m_pResult',['../class_l_system.html#a3ac3b539bb3468733d21d315980d9edf',1,'LSystem']]],
   ['m_5fptpos',['m_ptPos',['../class_stack_frame.html#ab679a9ee97e22c61731d805e896e64ee',1,'StackFrame']]],
-  ['m_5fstrbuffer',['m_strBuffer',['../class_l_system.html#ab04aa632e68b3d619b69a21e65895372',1,'LSystem']]],
-  ['m_5fstrrhs',['m_strRHS',['../class_l_production.html#a471dc3e86f753ead676cb5531d0f293c',1,'LProduction']]],
-  ['m_5fstrroot',['m_strRoot',['../class_l_system.html#a9e1e4d209c4c6ddbe88c0fba509fe24f',1,'LSystem']]],
-  ['m_5fstrrulestring',['m_strRuleString',['../class_l_system.html#a35088b1fb8569aabca80f36abcfedc87',1,'LSystem']]],
-  ['m_5fustate',['m_uState',['../class_c_random.html#a3f974d765b7b71e16692f410dfeb78ab',1,'CRandom']]]
+  ['m_5fustate',['m_uState',['../class_c_random.html#a3f974d765b7b71e16692f410dfeb78ab',1,'CRandom']]],
+  ['m_5fwstrbuffer',['m_wstrBuffer',['../class_l_system.html#a05a87cb4bea9da3fa8491c127a8aa722',1,'LSystem']]],
+  ['m_5fwstrrhs',['m_wstrRHS',['../class_l_production.html#ab4ea5f2464db0f382fd0dfb7234efc0c',1,'LProduction']]],
+  ['m_5fwstrroot',['m_wstrRoot',['../class_l_system.html#a864dc2ee012f03b25ce5b47f61b5d1c3',1,'LSystem']]],
+  ['m_5fwstrrulestring',['m_wstrRuleString',['../class_l_system.html#ac9aed1ea4398a7596f6e3df2d470aa11',1,'LSystem']]]
 ];

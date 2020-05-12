@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['togglelinethickness',['ToggleLineThickness',['../class_c_main.html#a10cc16a2d76eb2577d8767911411f4dc',1,'CMain']]],
-  ['toggleshowrules',['ToggleShowRules',['../class_c_main.html#a286d71b63234e7faa1bb40e37a6e4bba',1,'CMain']]],
-  ['turtledesc',['TurtleDesc',['../class_turtle_desc.html',1,'TurtleDesc'],['../class_turtle_desc.html#a1015ba0569afe744c02d39bdadf321ce',1,'TurtleDesc::TurtleDesc()']]],
-  ['types_2eh',['Types.h',['../_types_8h.html',1,'']]]
+  ['windowshelpers_2ecpp',['WindowsHelpers.cpp',['../_windows_helpers_8cpp.html',1,'']]],
+  ['windowshelpers_2eh',['WindowsHelpers.h',['../_windows_helpers_8h.html',1,'']]],
+  ['wndproc',['WndProc',['../_main_8cpp.html#a30a1e3b0304f1b083637664cbda94e72',1,'Main.cpp']]],
+  ['wwinmain',['wWinMain',['../_main_8cpp.html#ad7483c50ba0ceb8cee64426d4e7e9bb3',1,'Main.cpp']]]
 ];

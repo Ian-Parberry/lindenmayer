@@ -104,9 +104,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0aeeb0840f1b19fa332aaa9f08e2c8bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_main.html#a0aeeb0840f1b19fa332aaa9f08e2c8bc">SetType</a> (UINT t)</td></tr>
 <tr class="memdesc:a0aeeb0840f1b19fa332aaa9f08e2c8bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set type.  <a href="#a0aeeb0840f1b19fa332aaa9f08e2c8bc">More...</a><br /></td></tr>
 <tr class="separator:a0aeeb0840f1b19fa332aaa9f08e2c8bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af088cf33d39f68d4fff00537c8eee234"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_main.html#af088cf33d39f68d4fff00537c8eee234">SaveImage</a> ()</td></tr>
-<tr class="memdesc:af088cf33d39f68d4fff00537c8eee234"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save image to a file.  <a href="#af088cf33d39f68d4fff00537c8eee234">More...</a><br /></td></tr>
-<tr class="separator:af088cf33d39f68d4fff00537c8eee234"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5f045f96f06e4330e5f8fc103d6527f"><td class="memItemLeft" align="right" valign="top">Gdiplus::Bitmap *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_main.html#ac5f045f96f06e4330e5f8fc103d6527f">GetBitmap</a> ()</td></tr>
+<tr class="memdesc:ac5f045f96f06e4330e5f8fc103d6527f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get pointer to bitmap.  <a href="#ac5f045f96f06e4330e5f8fc103d6527f">More...</a><br /></td></tr>
+<tr class="separator:ac5f045f96f06e4330e5f8fc103d6527f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d98782b57359c1801ced430f7bc73d6"><td class="memItemLeft" align="right" valign="top">const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_main.html#a4d98782b57359c1801ced430f7bc73d6">IsStochastic</a> () const</td></tr>
 <tr class="memdesc:a4d98782b57359c1801ced430f7bc73d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is a stochastic L-system.  <a href="#a4d98782b57359c1801ced430f7bc73d6">More...</a><br /></td></tr>
 <tr class="separator:a4d98782b57359c1801ced430f7bc73d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,7 +120,7 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:ac53889e465a7c6ec0949f48c87055126"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_main.html#ac53889e465a7c6ec0949f48c87055126">SetRules</a> ()</td></tr>
-<tr class="memdesc:ac53889e465a7c6ec0949f48c87055126"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create L-system rules.  <a href="#ac53889e465a7c6ec0949f48c87055126">More...</a><br /></td></tr>
+<tr class="memdesc:ac53889e465a7c6ec0949f48c87055126"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the L-system rules.  <a href="#ac53889e465a7c6ec0949f48c87055126">More...</a><br /></td></tr>
 <tr class="separator:ac53889e465a7c6ec0949f48c87055126"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a646ba43b04c45cd6a90f79a0c0334cf4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_main.html#a646ba43b04c45cd6a90f79a0c0334cf4">Draw</a> (const <a class="el" href="class_turtle_desc.html">TurtleDesc</a> &amp;d)</td></tr>
 <tr class="memdesc:a646ba43b04c45cd6a90f79a0c0334cf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw turtle graphics.  <a href="#a646ba43b04c45cd6a90f79a0c0334cf4">More...</a><br /></td></tr>
@@ -165,7 +165,7 @@ ULONG_PTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <tr class="separator:a9ee2b98996a1dbe810c53bce0aa5a360"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae109b88ed782dfbfdc8cd694cf2a766f"><td class="memItemLeft" align="right" valign="top"><a id="ae109b88ed782dfbfdc8cd694cf2a766f"></a>
 Gdiplus::Bitmap *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_main.html#ae109b88ed782dfbfdc8cd694cf2a766f">m_pBitmap</a> = nullptr</td></tr>
-<tr class="memdesc:ae109b88ed782dfbfdc8cd694cf2a766f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a bitmap. <br /></td></tr>
+<tr class="memdesc:ae109b88ed782dfbfdc8cd694cf2a766f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to a bitmap image. <br /></td></tr>
 <tr class="separator:ae109b88ed782dfbfdc8cd694cf2a766f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6225591fc97e44d2544795f94514ad4"><td class="memItemLeft" align="right" valign="top"><a id="ae6225591fc97e44d2544795f94514ad4"></a>
 <a class="el" href="class_l_system.html">LSystem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_main.html#ae6225591fc97e44d2544795f94514ad4">m_cLSystem</a></td></tr>
@@ -268,7 +268,7 @@ Gdiplus::Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </div><div class="memdoc">
 <p>Add menus to the menu bar and store the menu handles, which will be needed later to set checkmarks and such. </p>
 
-<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00283">283</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00285">285</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
 
 </div>
 </div>
@@ -295,14 +295,14 @@ Gdiplus::Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Use turtle graphics to draw the shape corresponding to the generated string to the bitmap while calculating the <em>dirty rectangle</em> (the smallest rectangle that contains all of the non-transparent pixels). </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Use turtle graphics to draw the shape corresponding to the generated string to <code>m_pBitmap</code>, which gets resized to the smallest rectangle containing all of the non-transparent pixels. This is done by doing turtle graphics twice, the first time without drawing but measuring the extents of the rectangle that gets drawn on. After measuring, the bitmap is resized and then a second iteration of turtle graphics is performed to draw the image. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">d</td><td>Turtle graphics descriptor. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00155">155</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00158">158</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
 
 </div>
 </div>
@@ -320,9 +320,9 @@ Gdiplus::Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Use turtle graphics to draw the shape corresponding to the generated string to the bitmap while calculating the <em>dirty rectangle</em> (the smallest rectangle that contains all of the non-transparent pixels). This version of the function constructs a hard-coded turtle graphics descriptor appropriate to the current type and then uses <a class="el" href="class_c_main.html#a646ba43b04c45cd6a90f79a0c0334cf4" title="Draw turtle graphics. ">Draw(const TurtleDesc&amp;)</a> to do the actual work. </p>
+<p>Use turtle graphics to draw the shape corresponding to the generated string to <code>m_pBitmap</code>, which gets resized to the smallest rectangle containing all of the non-transparent pixels. This function constructs a hard-coded turtle graphics descriptor appropriate to the current type stored in <code>m_nType</code> and then calls <a class="el" href="class_c_main.html#a646ba43b04c45cd6a90f79a0c0334cf4" title="Draw turtle graphics. ">Draw(const TurtleDesc&amp;)</a> to do the actual work. </p>
 
-<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00252">252</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00254">254</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
 
 </div>
 </div>
@@ -395,7 +395,7 @@ Gdiplus::Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </div><div class="memdoc">
 <p>Enable the <code>Generate</code> item in the <code>File</code> menu if stochastic, otherwise gray it out so it can't be used. </p>
 
-<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00349">349</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00351">351</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
 
 </div>
 </div>
@@ -415,7 +415,27 @@ Gdiplus::Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </div><div class="memdoc">
 <p>Generate an L-system string for a hard-coded number of generations. </p>
 
-<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00463">463</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00467">467</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ac5f045f96f06e4330e5f8fc103d6527f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5f045f96f06e4330e5f8fc103d6527f">&#9670;&nbsp;</a></span>GetBitmap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Gdiplus::Bitmap * CMain::GetBitmap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Reader function for the bitmap pointer <code>m_pBitmap</code> which, it is assumed, contains a bitmap drawn by turtle graphics from a string generated by an L-system. </p><dl class="section return"><dt>Returns</dt><dd>The bitmap pointer <code>m_pBitmap</code>. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00489">489</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
 
 </div>
 </div>
@@ -450,7 +470,7 @@ Gdiplus::Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The width of the rule string in pixels. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00514">514</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00509">509</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
 
 </div>
 </div>
@@ -470,7 +490,7 @@ Gdiplus::Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </div><div class="memdoc">
 <p>Stochasticity test. </p><dl class="section return"><dt>Returns</dt><dd>true if the L-system is stochastic. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00501">501</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00496">496</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
 
 </div>
 </div>
@@ -491,26 +511,6 @@ Gdiplus::Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 <p>Draw the bitmap to the window client area, scaled down if necessary. This function should only be called in response to a WM_PAINT message. </p>
 
 <p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00090">90</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
-
-</div>
-</div>
-<a id="af088cf33d39f68d4fff00537c8eee234"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af088cf33d39f68d4fff00537c8eee234">&#9670;&nbsp;</a></span>SaveImage()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool CMain::SaveImage </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Save bitmap as a PNG image file. A temporary bitmap the size of the dirty rectangle is used to ensure that the saved image is cropped to exactly the size needed. </p><dl class="section return"><dt>Returns</dt><dd>true if the save succeeded. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00485">485</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
 
 </div>
 </div>
@@ -538,7 +538,7 @@ Gdiplus::Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </div><div class="memdoc">
 <p>Set the <code>L-System</code> menu checkmarks. Uncheck them all, then check the one corresponding to the current L-system type. This assumes the correct ordering of defines in <a class="el" href="_windows_helpers_8h.html" title="Interface for some helpful Windows-specific functions. ">WindowsHelpers.h</a> (see the comments there). </p>
 
-<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00339">339</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00341">341</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
 
 </div>
 </div>
@@ -564,9 +564,9 @@ Gdiplus::Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Set rules for the current L-system type. The rules are hard-coded from ABOP using a long switch statement. </p>
+<p>Set rules for the current L-system type. The rules are hard-coded from ABOP using a long switch statement. Exercise for the reader: add your favorite L-system rules from ABOP. More difficult exercise: add the ability to read custom rules from a text or XML file. </p>
 
-<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00365">365</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00369">369</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
 
 </div>
 </div>
@@ -592,7 +592,7 @@ Gdiplus::Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00424">424</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00428">428</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
 
 </div>
 </div>
@@ -612,7 +612,7 @@ Gdiplus::Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </div><div class="memdoc">
 <p>Toggle the line thickness flag. Set the checkmark on the menu entry and ask for a redraw of the window. </p>
 
-<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00439">439</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00443">443</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
 
 </div>
 </div>
@@ -632,14 +632,14 @@ Gdiplus::Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </div><div class="memdoc">
 <p>Toggle the show rules flag. Set the checkmark on the menu entry and ask for a refresh of the window. </p>
 
-<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00449">449</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_c_main_8cpp_source.html#l00453">453</a> of file <a class="el" href="_c_main_8cpp_source.html">CMain.cpp</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 11 2020 14:47:42 for Lindenmayer System by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue May 12 2020 16:12:11 for Lindenmayer System by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>
