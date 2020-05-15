@@ -104,29 +104,32 @@ void CMain::OnPaint(){
   const int nClientWidth = rectClient.right - rectClient.left; //client width
   const int nClientHt = rectClient.bottom - rectClient.top; //client height
 
-  //draw the bitmap to the center of the client area
+  //compute the width of the rules text and the drawing scale for the bitmap
 
-  int textwidth = m_bShowRules? (int)std::ceil(GetRuleStrWidth(graphics)): 0;
+  int dx = m_bShowRules? (int)std::ceil(GetRuleStrWidth(graphics)): 0; //text width
 
-  const int margin = 10; //default margin
+  const UINT margin = 10; //margin width
+  const UINT mx = (dx > 0? 3: 2)*margin; //sum of horizontal margin widths
 
-  const float xscale = float(nClientWidth
-    - (textwidth > 0? 3: 2)*margin - textwidth)/w;
-  const float yscale = float(nClientHt - 2*margin)/h;
-  const float scale = min(min(xscale, yscale), 1);
+  const float xscale = float(nClientWidth - mx - dx)/w; //horizontal scale
+  const float yscale = float(nClientHt - 2*margin)/h; //vertical scale
+  const float scale = min(min(xscale, yscale), 1); //actual scale
 
-  Gdiplus::Rect rectDest;
+  //compute the destination rectangle
+
+  Gdiplus::Rect rectDest; //destination rectangle
 
   rectDest.Width  = (int)std::floor(scale*w);
   rectDest.Height = (int)std::floor(scale*h);
 
-  rectDest.X = max(2*margin + textwidth, 
-    (nClientWidth - rectDest.Width + textwidth)/2);
+  rectDest.X = max(2*margin + dx, (nClientWidth - rectDest.Width + dx)/2);
   rectDest.Y = max(margin, (nClientHt - rectDest.Height)/2);
+
+  //draw the bitmap to the screen (note: NOT on the bitmap)
   
   graphics.DrawImage(m_pBitmap, rectDest);
 
-  //draw the rules on the screen (note: NOT on the bitmap)
+  //draw the rules to the screen (note: NOT on the bitmap)
 
   if(m_bShowRules)
     DrawRules(graphics, Gdiplus::PointF(margin, margin)); 
@@ -164,8 +167,6 @@ void CMain::Draw(const TurtleDesc& d){
   Gdiplus::Graphics* pGraphics = nullptr;
 
   Gdiplus::PointF ptCur; //current position, the start of the line
-  float angle = 0; //current orientation
-  float len = d.m_fLength; //current branch length
     
   Gdiplus::Pen pen(Gdiplus::Color::Black);
   pen.SetWidth(d.m_fPointSize);
@@ -182,6 +183,9 @@ void CMain::Draw(const TurtleDesc& d){
   //measure once, draw once
 
   for(int i: {0, 1}){ //i==0 means measure, i==1 means draw
+    float angle = 0; //current orientation
+    float len = d.m_fLength; //current branch length
+
     for(size_t j=0; j<s.size(); j++){ //loop through characters of s
       Gdiplus::PointF ptNext; //next position (the end of the line)
 
@@ -209,8 +213,8 @@ void CMain::Draw(const TurtleDesc& d){
           const StackFrame& sf = stack.top();
           
           ptCur = sf.m_ptPos;
-          angle    = sf.m_fAngle;
-          len      = sf.m_fLength;
+          angle = sf.m_fAngle;
+          len   = sf.m_fLength;
 
           stack.pop(); //this must be last, obviously
         } //case
@@ -219,9 +223,8 @@ void CMain::Draw(const TurtleDesc& d){
     } //for
 
     if(i == 0){ //done measuring, prepare for drawing
-      delete m_pBitmap;
       
-      //make the dirty rectangle slightly larger to include lines on the edge
+      //make the bitmap slightly larger to include lines on the edge
 
       const int delta = (int)std::ceil(d.m_fPointSize/2.0f); //amount to add
       r.right  += delta;
@@ -229,14 +232,17 @@ void CMain::Draw(const TurtleDesc& d){
 
       //create new bitmap of exactly the right size
 
-      const int w = r.right - r.left;
-      const int h = r.bottom - r.top;
+      const int w = r.right - r.left; //new bitmap width
+      const int h = r.bottom - r.top; //new bitmap height
+      ptCur = Gdiplus::PointF(-(float)r.left, -(float)r.top); //new start point
+
+      //create bitmap and graphics object for drawing in the next iteration
+      delete m_pBitmap;
+      delete pGraphics;
+
       m_pBitmap = new Gdiplus::Bitmap(w, h, PixelFormat32bppARGB); 
-      ptCur = Gdiplus::PointF(-(float)r.left, -(float)r.top);
-
-      //create graphics object open on bitmap for drawing in the next iteration
-
       pGraphics = new Gdiplus::Graphics(m_pBitmap);
+
       pGraphics->SetSmoothingMode(Gdiplus::SmoothingModeHighQuality);
       pGraphics->Clear(Gdiplus::Color::Transparent); //transparent background
     } //if

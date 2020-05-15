@@ -35,7 +35,7 @@
 
 #pragma region Menu IDs
 
-#define IDM_FILE_GENERATE 1 ///< Menu id for Save.
+#define IDM_FILE_GENERATE 1 ///< Menu id for Generate.
 #define IDM_FILE_SAVE 2 ///< Menu id for Save.
 #define IDM_FILE_QUIT 3 ///< Menu id for Quit.
 

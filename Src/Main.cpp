@@ -74,7 +74,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
             g_pMain->Generate();
             g_pMain->Draw();
           } //if
-          break;         
+          break;
 
         case IDM_FILE_SAVE: //save bitmap to image file       
           SaveBitmap(hWnd, g_pMain->GetBitmap());
