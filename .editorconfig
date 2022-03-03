@@ -1,0 +1,6 @@
+root = true
+
+# All files 
+[*] 
+guidelines = 80
+guidelines_style = 1px dashed cyan
